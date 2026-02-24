@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refund Policy — Laundrify</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --base: #bbd2f0; --base-light: #ddeaf8;
+    --blue: #2a6cc4; --blue-deep: #1a4a9e; --dark: #0e1e38;
+    --text: #0e1e38; --text-muted: #4a6080;
+    --grad: linear-gradient(160deg, #ffffff 0%, #ddeaf8 30%, #bbd2f0 65%, #8ab8e8 100%);
+    --green: #15803d; --green-bg: rgba(34,197,94,0.08); --green-border: rgba(34,197,94,0.25);
+    --red: #b91c1c; --red-bg: rgba(239,68,68,0.07); --red-border: rgba(239,68,68,0.22);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--grad); min-height: 100vh; color: var(--text); }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 52px; height: 68px;
+    background: rgba(255,255,255,0.6); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(187,210,240,0.6);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 600; color: var(--dark); text-decoration: none; }
+  .nav-logo span { color: var(--blue); }
+  .nav-back { color: var(--text-muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+  .nav-back::before { content: '← '; }
+  .nav-back:hover { color: var(--dark); }
+
+  .page-hero { padding: 120px 24px 52px; text-align: center; max-width: 800px; margin: 0 auto; }
+  .page-tag {
+    display: inline-block; background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(42,108,196,0.25); border-radius: 50px;
+    padding: 5px 18px; font-size: 0.75rem; font-weight: 500; color: var(--blue);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 20px;
+  }
+  .page-hero h1 {
+    font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600; color: var(--dark); line-height: 1.2; margin-bottom: 14px;
+  }
+  .page-hero p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; max-width: 580px; margin: 0 auto; }
+  .last-updated {
+    display: inline-block; margin-top: 14px; font-size: 0.8rem; color: var(--text-muted);
+    background: rgba(255,255,255,0.6); border-radius: 50px;
+    padding: 4px 14px; border: 1px solid rgba(187,210,240,0.6);
+  }
+
+  .toc-wrap { max-width: 800px; margin: 0 auto 24px; padding: 0 24px; }
+  .toc-box {
+    background: rgba(255,255,255,0.65); border: 1px solid rgba(187,210,240,0.8);
+    border-radius: 20px; padding: 28px 40px; backdrop-filter: blur(10px);
+  }
+  .toc-box h2 {
+    font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600;
+    color: var(--dark); margin-bottom: 14px; padding-bottom: 10px;
+    border-bottom: 1px solid rgba(187,210,240,0.7);
+  }
+  .toc-list { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 3px 24px; }
+  .toc-list a {
+    color: var(--blue); text-decoration: none; font-size: 0.81rem;
+    padding: 5px 0; display: block; border-bottom: 1px solid rgba(187,210,240,0.3); transition: color 0.2s;
+  }
+  .toc-list a:hover { color: var(--blue-deep); }
+
+  .legal-content { max-width: 800px; margin: 0 auto 80px; padding: 0 24px; }
+  .legal-card {
+    background: rgba(255,255,255,0.7); border: 1px solid rgba(187,210,240,0.8);
+    border-radius: 24px; padding: 52px 56px; backdrop-filter: blur(10px);
+    box-shadow: 0 4px 32px rgba(42,108,196,0.07);
+  }
+
+  .summary-banner {
+    background: rgba(42,108,196,0.05); border: 1px solid rgba(42,108,196,0.15);
+    border-radius: 14px; padding: 22px 28px; margin-bottom: 44px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .summary-banner .icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 2px; }
+  .summary-banner p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.85; }
+  .summary-banner strong { color: var(--dark); }
+
+  .legal-section { margin-bottom: 42px; scroll-margin-top: 90px; }
+  .legal-section:last-child { margin-bottom: 0; }
+  .legal-section h2 {
+    font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600;
+    color: var(--dark); margin-bottom: 14px; padding-bottom: 10px;
+    border-bottom: 1px solid rgba(187,210,240,0.7);
+  }
+  .legal-section h3 { font-size: 0.95rem; font-weight: 600; color: var(--dark); margin: 20px 0 8px; }
+  .legal-section p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 12px; }
+  .legal-section p:last-child { margin-bottom: 0; }
+  .legal-section ul { padding-left: 22px; margin-bottom: 12px; }
+  .legal-section li { font-size: 0.92rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 8px; }
+
+  /* Eligible / Not eligible two-col cards */
+  .verdict-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  .verdict-card { border-radius: 14px; padding: 20px 22px; }
+  .verdict-card.yes { background: var(--green-bg); border: 1px solid var(--green-border); }
+  .verdict-card.no  { background: var(--red-bg);   border: 1px solid var(--red-border); }
+  .verdict-card h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 7px; }
+  .verdict-card.yes h4 { color: var(--green); }
+  .verdict-card.no  h4 { color: var(--red); }
+  .verdict-card ul { padding-left: 18px; margin: 0; }
+  .verdict-card li { font-size: 0.84rem; line-height: 1.75; margin-bottom: 6px; color: var(--text-muted); }
+
+  .steps { counter-reset: step; padding: 0; list-style: none; margin: 14px 0; }
+  .steps li {
+    counter-increment: step; display: flex; gap: 14px; align-items: flex-start;
+    margin-bottom: 16px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.75;
+  }
+  .steps li::before {
+    content: counter(step); flex-shrink: 0;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--blue); color: #fff;
+    font-size: 0.75rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; margin-top: 1px;
+  }
+  .steps li strong { color: var(--dark); }
+
+  .timeline-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 14px 0; border-bottom: 1px solid rgba(187,210,240,0.45);
+    font-size: 0.9rem;
+  }
+  .timeline-row:last-child { border-bottom: none; }
+  .timeline-label { font-weight: 600; color: var(--dark); min-width: 210px; flex-shrink: 0; }
+  .timeline-val { color: var(--text-muted); line-height: 1.7; }
+
+  .notice-box {
+    background: rgba(42,108,196,0.05); border-left: 3px solid var(--blue);
+    border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 14px 0;
+    font-size: 0.88rem; color: var(--text-muted); line-height: 1.75;
+  }
+  .notice-box strong { color: var(--dark); }
+
+  .warn-box {
+    background: var(--red-bg); border-left: 3px solid #ef4444;
+    border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 14px 0;
+    font-size: 0.88rem; color: var(--text-muted); line-height: 1.75;
+  }
+  .warn-box strong { color: var(--red); }
+
+  .contact-box {
+    background: linear-gradient(135deg, rgba(42,108,196,0.08), rgba(187,210,240,0.2));
+    border: 1px solid rgba(42,108,196,0.2); border-radius: 16px; padding: 28px 32px; margin-top: 44px;
+  }
+  .contact-box h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--dark); margin-bottom: 10px; }
+  .contact-box p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 5px; line-height: 1.7; }
+  .contact-box a { color: var(--blue); text-decoration: none; font-weight: 500; }
+
+  footer { background: rgba(14,30,56,0.95); padding: 36px 60px 28px; }
+  .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: #fff; text-decoration: none; }
+  .footer-logo span { color: var(--base); }
+  .footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+  .footer-legal { display: flex; gap: 20px; flex-wrap: wrap; }
+  .footer-legal a { font-size: 0.8rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+  .footer-legal a:hover { color: rgba(255,255,255,0.8); }
+
+  @media (max-width: 680px) {
+    nav { padding: 0 20px; }
+    .legal-card { padding: 32px 22px; }
+    .toc-box { padding: 22px 20px; }
+    .toc-list { grid-template-columns: 1fr; }
+    .verdict-grid { grid-template-columns: 1fr; }
+    .timeline-label { min-width: 140px; }
+    footer { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html"><span>Laundr</span>ify</a>
+  <a class="nav-back" href="index.html">Back to Home</a>
+</nav>
+
+<section class="page-hero">
+  <span class="page-tag">Legal</span>
+  <h1>Refund Policy</h1>
+  <p>We take quality seriously. This policy explains when refunds apply, how to request one, and what to expect from our resolution process.</p>
+  <span class="last-updated">Last updated: February 15, 2026</span>
+</section>
+
+<div class="toc-wrap">
+  <div class="toc-box">
+    <h2>Table of Contents</h2>
+    <ul class="toc-list">
+      <li><a href="#s1">1. Our Approach to Refunds</a></li>
+      <li><a href="#s2">2. Acceptance of Risk</a></li>
+      <li><a href="#s3">3. Eligible Refund Situations</a></li>
+      <li><a href="#s4">4. Non-Refundable Situations</a></li>
+      <li><a href="#s5">5. Refund Amount & Cap</a></li>
+      <li><a href="#s6">6. Cancellations</a></li>
+      <li><a href="#s7">7. How to Request a Refund</a></li>
+      <li><a href="#s8">8. The Investigation Process</a></li>
+      <li><a href="#s9">9. How & When You Get Paid Back</a></li>
+      <li><a href="#s10">10. Partner Liability</a></li>
+      <li><a href="#s11">11. Fraudulent Claims</a></li>
+      <li><a href="#s12">12. Changes to This Policy</a></li>
+      <li><a href="#s13">13. Contact Us</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="legal-content">
+  <div class="legal-card">
+
+    <div class="summary-banner">
+      <span class="icon">📋</span>
+      <p><strong>Quick summary:</strong> Laundrify refunds are available only in serious, verifiable cases such as a lost item, clear damage caused by the cleaning process, a wrong item returned, or a paid service that was never rendered. Refunds are capped at the value of the service fee you paid — we do not cover the replacement value of garments. You have <strong>48 hours</strong> from receiving your order to raise a complaint. All complaints are investigated before any refund is approved.</p>
+    </div>
+
+    <!-- SECTION 1 -->
+    <div class="legal-section" id="s1">
+      <h2>1. Our Approach to Refunds</h2>
+      <p>Laundrify is a marketplace platform that connects customers with independent dry cleaning businesses ("Partners"). We are committed to maintaining high service standards on our platform, and we take complaints seriously.</p>
+      <p>However, because dry cleaning involves physical garments handled by independent third-party Partners, refunds are not automatic. Every refund request is reviewed individually and must meet the criteria set out in this policy before a refund is approved.</p>
+      <p>Refunds on the Laundrify platform are reserved for situations involving clear and verifiable fault — not general dissatisfaction or subjective quality preferences. We believe this is fair to both customers and the Partners who depend on the platform for their livelihoods.</p>
+      <p>This policy applies to orders placed through both the <strong>Laundrify</strong> customer app and services fulfilled by Partners using the <strong>Laundrify DryCleaners</strong> app.</p>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="legal-section" id="s2">
+      <h2>2. Acceptance of Risk</h2>
+      <p>By placing an order through Laundrify, you acknowledge and accept that dry cleaning and laundry services carry inherent risks. These include, but are not limited to:</p>
+      <ul>
+        <li>Colour fading or bleeding in garments with unstable dyes</li>
+        <li>Shrinkage in garments not suited to the cleaning method applied</li>
+        <li>Reactions in garments with pre-existing wear, weakness, or undisclosed fabric sensitivities</li>
+        <li>Minor variations in folding, pressing, or finishing that do not materially affect the garment</li>
+      </ul>
+      <p>These risks are inherent to the nature of laundry and dry cleaning services and are not automatically grounds for a refund. By using the platform, you agree that Laundrify and its Partners are not liable for outcomes that fall within these inherent risks, unless there is clear evidence of negligence or fault on the part of the Partner.</p>
+      <p>We strongly recommend that you disclose any special care instructions, fabric sensitivities, or pre-existing damage when submitting items. Failure to do so limits your ability to make a successful refund claim.</p>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="legal-section" id="s3">
+      <h2>3. Eligible Refund Situations</h2>
+      <p>A refund may be approved where there is clear, verifiable evidence of one of the following:</p>
+
+      <div class="verdict-grid">
+        <div class="verdict-card yes">
+          <h4>✓ May Qualify for a Refund</h4>
+          <ul>
+            <li>Your item was lost entirely and cannot be returned by the Partner</li>
+            <li>Your item was returned with visible damage clearly caused by the cleaning process — such as burns, tears, dye transfer from incorrect handling, or shrinkage from use of wrong temperature</li>
+            <li>You received the wrong item — garments belonging to another customer were returned to you</li>
+            <li>You paid for a service that was never rendered and your items were never picked up or processed</li>
+            <li>You were charged for a service you did not book (fraudulent or erroneous charge)</li>
+          </ul>
+        </div>
+        <div class="verdict-card no">
+          <h4>✗ Does Not Qualify for a Refund</h4>
+          <ul>
+            <li>General dissatisfaction with cleaning quality without evidence of fault</li>
+            <li>Pre-existing stains, damage, or wear that was present before submission</li>
+            <li>Outcomes resulting from undisclosed fabric type or care label instructions</li>
+            <li>Customer changed their mind after the order was placed or picked up</li>
+            <li>Minor imperfections in pressing or folding that do not damage the garment</li>
+            <li>Inherent risks of dry cleaning as described in Section 2</li>
+            <li>Items submitted in poor condition prior to cleaning</li>
+            <li>Complaints raised more than 48 hours after receiving the order</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="notice-box">
+        <strong>Important:</strong> Laundrify reserves the right to determine, at its sole discretion, whether a refund situation is eligible based on the evidence provided. We may request photos, order records, or other documentation to assess your claim. Approval is not guaranteed simply because a situation is listed above — the claim must be substantiated with evidence.
+      </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="legal-section" id="s4">
+      <h2>4. Non-Refundable Situations</h2>
+      <p>In addition to those listed in Section 3, no refund will be issued in the following circumstances:</p>
+      <ul>
+        <li>The complaint was not raised within 48 hours of receiving the completed order.</li>
+        <li>The customer is unable to provide reasonable evidence to support the claim (e.g., photos of the damage, description of the issue).</li>
+        <li>The damage or loss was caused by items left in pockets by the customer (e.g., pens, lighters, coins, keys) that were not disclosed before processing.</li>
+        <li>The garment contained prohibited or hazardous materials that the customer failed to disclose.</li>
+        <li>The customer provided false, misleading, or exaggerated information in the complaint.</li>
+        <li>The order was cancelled by the customer after pickup — cancellations are not permitted once an order has been accepted and collected (see Section 6).</li>
+        <li>The issue relates to an item that was already in a damaged, stained, or deteriorated condition before it was submitted for cleaning, and this was not disclosed at the time of submission.</li>
+        <li>The customer accepted the returned items without raising any objection at the time of collection.</li>
+      </ul>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="legal-section" id="s5">
+      <h2>5. Refund Amount & Cap</h2>
+      <p>Where a refund is approved, the amount refunded will be equal to the <strong>service fee you paid for the affected order</strong> — that is, the amount charged by Laundrify for the specific service relating to the complaint.</p>
+      <p>Laundrify's maximum liability for any approved refund claim is strictly limited to the value of the service fee paid. We do not refund:</p>
+      <ul>
+        <li>The market value, replacement cost, or sentimental value of any garment or item</li>
+        <li>Any consequential, incidental, or indirect losses arising from the service</li>
+        <li>Any costs incurred by the customer as a result of the item being unavailable (e.g., needing to buy a replacement outfit for an event)</li>
+      </ul>
+      <div class="warn-box">
+        <strong>Important:</strong> Laundrify is a technology marketplace platform, not an insurer or guarantor of garment value. We do not provide garment insurance. If you wish to protect the value of high-value items, we recommend using a specialist dry cleaner with their own insurance, or taking out a personal property insurance policy that covers garments sent for cleaning.
+      </div>
+      <p>Where only part of an order is affected — for example, one item out of several is damaged — the refund will be calculated against the service fee attributable to that specific item, not the entire order total. Refunds are not partial in the sense of splitting between full and zero; once eligibility is confirmed for a specific item or service, the full relevant service fee for that item is refunded.</p>
+    </div>
+
+    <!-- SECTION 6 -->
+    <div class="legal-section" id="s6">
+      <h2>6. Cancellations</h2>
+      <p>Orders placed through the Laundrify platform <strong>cannot be cancelled</strong> once they have been accepted and collected by a Partner. By placing an order, you agree to this no-cancellation policy.</p>
+      <p>No refund will be issued on the basis of a cancellation request after pickup. This is because the Partner will have already begun processing your items and has committed their time and resources to your order.</p>
+      <div class="notice-box">
+        <strong>Before placing an order:</strong> Please ensure you are ready to proceed before confirming your booking. If you have questions about a Partner's services, pricing, or capacity, use the in-app messaging feature to communicate with them before placing your order.
+      </div>
+    </div>
+
+    <!-- SECTION 7 -->
+    <div class="legal-section" id="s7">
+      <h2>7. How to Request a Refund</h2>
+      <p>You must raise your complaint within <strong>48 hours</strong> of receiving your completed order. Complaints raised after this window will not be considered, regardless of the nature of the issue.</p>
+      <p>To submit a refund request:</p>
+      <ol class="steps">
+        <li>
+          <div><strong>Document the issue immediately.</strong> Take clear photographs of the damaged, lost, or incorrect item as soon as you receive your order. Do not wash, alter, or further handle the item before raising your complaint, as this may affect your claim.</div>
+        </li>
+        <li>
+          <div><strong>Contact Laundrify support within 48 hours.</strong> Email us at <a href="mailto:help@laundrify.com.ng" style="color:var(--blue); font-weight:500;">help@laundrify.com.ng</a> with the subject line: <em>"Refund Request — Order #[your order number]"</em>. Include your account email, the order number, a description of the issue, and your supporting photos or evidence.</div>
+        </li>
+        <li>
+          <div><strong>We acknowledge your request.</strong> We will send you a confirmation email acknowledging receipt of your complaint, usually within 1–2 business days.</div>
+        </li>
+        <li>
+          <div><strong>Investigation begins.</strong> We will review your complaint and contact the relevant Partner to gather their account of events. See Section 8 for the full investigation process and timelines.</div>
+        </li>
+        <li>
+          <div><strong>Decision is communicated.</strong> Once the investigation is complete, we will notify you of our decision by email. If your refund is approved, we will initiate the refund within the timeframes described in Section 9.</div>
+        </li>
+      </ol>
+    </div>
+
+    <!-- SECTION 8 -->
+    <div class="legal-section" id="s8">
+      <h2>8. The Investigation Process</h2>
+      <p>All refund requests are subject to a fair investigation before any decision is made. Laundrify acts as a neutral mediator in disputes between customers and Partners.</p>
+      <p>During the investigation:</p>
+      <ul>
+        <li>We will review the details of your order, including pickup records, order notes, and any in-app communications between you and the Partner.</li>
+        <li>We will present the complaint to the relevant Partner and give them a reasonable opportunity to respond and provide their account of events.</li>
+        <li>We may request additional evidence from either party — including photographs, care label records, or written statements.</li>
+        <li>We will assess the claim against the eligibility criteria in Section 3 and reach a decision based on the balance of evidence.</li>
+      </ul>
+
+      <h3>Investigation timelines</h3>
+      <div class="timeline-row">
+        <span class="timeline-label">Acknowledgement of complaint</span>
+        <span class="timeline-val">Within 1–2 business days of submission</span>
+      </div>
+      <div class="timeline-row">
+        <span class="timeline-label">Standard investigation period</span>
+        <span class="timeline-val">Within 14 working days of acknowledgement</span>
+      </div>
+      <div class="timeline-row">
+        <span class="timeline-label">Complex cases</span>
+        <span class="timeline-val">May be extended to 21 working days where additional evidence is required. You will be notified if an extension is needed.</span>
+      </div>
+      <div class="timeline-row">
+        <span class="timeline-label">Final decision</span>
+        <span class="timeline-val">Communicated by email. Our decision is final and binding within the scope of the platform.</span>
+      </div>
+
+      <div class="notice-box">
+        <strong>Partners cannot cancel or withdraw from a dispute</strong> once it has been raised. All Partners are contractually required to cooperate with Laundrify's investigation process as a condition of using the platform. A Partner's failure to respond or cooperate will be taken into account when reaching our decision.
+      </div>
+    </div>
+
+    <!-- SECTION 9 -->
+    <div class="legal-section" id="s9">
+      <h2>9. How & When You Get Paid Back</h2>
+      <p>Where a refund is approved, it will be processed as follows:</p>
+
+      <div class="timeline-row">
+        <span class="timeline-label">Refund method</span>
+        <span class="timeline-val">Returned to your original payment method via Paystack reversal — the same card or account used to place the order.</span>
+      </div>
+      <div class="timeline-row">
+        <span class="timeline-label">Processing time</span>
+        <span class="timeline-val">7–14 working days from the date the refund is approved. This window accounts for Paystack processing time and your bank's clearing period.</span>
+      </div>
+      <div class="timeline-row">
+        <span class="timeline-label">Notification</span>
+        <span class="timeline-val">You will receive an email confirmation when the refund has been initiated on our end. If you do not see the funds after 14 working days, contact us and we will follow up with Paystack on your behalf.</span>
+      </div>
+
+      <div class="notice-box">
+        <strong>Note:</strong> Laundrify does not offer refunds as in-app wallet credits or cash payments. All refunds are returned exclusively via Paystack to your original payment method. If your original payment method is no longer active, please contact us before submitting your refund request so we can discuss an alternative.
+      </div>
+    </div>
+
+    <!-- SECTION 10 -->
+    <div class="legal-section" id="s10">
+      <h2>10. Partner Liability</h2>
+      <p>Where a refund is approved and the investigation determines that the fault lies with the Partner, the cost of the refund will be recovered from the Partner. Specifically:</p>
+      <ul>
+        <li>The refund amount will be deducted from the Partner's next scheduled weekly payout.</li>
+        <li>If the deduction exceeds the Partner's pending payout balance, the outstanding amount will be carried forward and deducted from subsequent payouts until the full amount is recovered.</li>
+        <li>Partners are notified of any deductions made to their payout and the reason for the deduction.</li>
+      </ul>
+      <p>Where the fault is unclear or cannot be conclusively attributed to the Partner, Laundrify reserves the right to absorb the cost of the refund at its discretion, in the interest of customer satisfaction and platform integrity. This does not constitute an admission of liability on the part of either Laundrify or the Partner.</p>
+      <p>Partners who accumulate repeated validated complaints or refund deductions may have their account suspended or permanently removed from the platform. For full details of Partner obligations and consequences, please refer to our <a href="partner-agreement.html" style="color:var(--blue); font-weight:500;">Partner Agreement</a>.</p>
+    </div>
+
+    <!-- SECTION 11 -->
+    <div class="legal-section" id="s11">
+      <h2>11. Fraudulent or Abusive Claims</h2>
+      <p>We take fraudulent refund claims seriously. If we determine that a refund request was submitted in bad faith — including where a customer has provided false information, fabricated or manipulated evidence, or made repeated unfounded complaints — we reserve the right to:</p>
+      <ul>
+        <li>Reject the refund request immediately</li>
+        <li>Suspend or permanently terminate the customer's account</li>
+        <li>Report the matter to the relevant Nigerian authorities where fraud is suspected</li>
+        <li>Pursue recovery of any costs incurred as a result of the fraudulent claim</li>
+      </ul>
+      <p>Customers found to have submitted fraudulent claims will be permanently banned from the Laundrify platform.</p>
+    </div>
+
+    <!-- SECTION 12 -->
+    <div class="legal-section" id="s12">
+      <h2>12. Changes to This Policy</h2>
+      <p>We may update this Refund Policy from time to time to reflect changes in our operations, legal requirements, or platform features. Any changes will be posted on this page with an updated "Last updated" date. Continued use of the Services after changes are posted constitutes your acceptance of the revised policy.</p>
+      <p>For significant changes, we will notify users via in-app notice or email where required.</p>
+    </div>
+
+    <!-- SECTION 13 -->
+    <div class="legal-section" id="s13">
+      <h2>13. Contact Us</h2>
+      <p>To submit a refund request or if you have questions about this policy, please contact us. Remember to include your order number and supporting evidence when submitting a complaint.</p>
+    </div>
+
+    <div class="contact-box">
+      <h3>Laundrify Support — Unang Tech</h3>
+      <p>Email: <a href="mailto:help@laundrify.com.ng">help@laundrify.com.ng</a></p>
+      <p>Subject line format: <em>Refund Request — Order #[your order number]</em></p>
+      <p>Phone: <a href="tel:+2347040745661">+2347040745661</a></p>
+      <p>Address: 24 Lunguda street, G/lada, G/lada, Federal capital territory 902301, Nigeria</p>
+      <p>Website: <a href="https://laundrify.com.ng" target="_blank">laundrify.com.ng</a></p>
+      <p style="margin-top: 12px; font-size: 0.85rem; color: var(--text-muted);">Complaints must be submitted within <strong>48 hours</strong> of receiving your order to be considered.</p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <a class="footer-logo" href="index.html"><span>Laundr</span>ify</a>
+    <p>© 2025 Laundrify. All rights reserved.</p>
+    <div class="footer-legal">
+      <a href="terms-of-service.html">Terms of Service</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="cookie-policy.html">Cookie Policy</a>
+      <a href="partner-agreement.html">Partner Agreement</a>
+      <a href="refund-policy.html">Refund Policy</a>
+      <a href="community-guidelines.html">Community Guidelines</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

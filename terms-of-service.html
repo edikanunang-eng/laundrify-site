@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — Laundrify</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --base: #bbd2f0; --base-light: #ddeaf8; --base-lighter: #eef4fc;
+    --blue: #2a6cc4; --blue-deep: #1a4a9e; --dark: #0e1e38;
+    --text: #0e1e38; --text-muted: #4a6080;
+    --grad: linear-gradient(160deg, #ffffff 0%, #ddeaf8 30%, #bbd2f0 65%, #8ab8e8 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--grad); min-height: 100vh; color: var(--text); }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 52px; height: 68px;
+    background: rgba(255,255,255,0.6); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(187,210,240,0.6);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 600; color: var(--dark); text-decoration: none; }
+  .nav-logo span { color: var(--blue); }
+  .nav-back { color: var(--text-muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+  .nav-back::before { content: '← '; }
+  .nav-back:hover { color: var(--dark); }
+
+  .page-hero { padding: 120px 24px 52px; text-align: center; max-width: 800px; margin: 0 auto; }
+  .page-tag {
+    display: inline-block; background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(42,108,196,0.25); border-radius: 50px;
+    padding: 5px 18px; font-size: 0.75rem; font-weight: 500; color: var(--blue);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 20px;
+  }
+  .page-hero h1 {
+    font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600; color: var(--dark); line-height: 1.2; margin-bottom: 14px;
+  }
+  .page-hero p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; max-width: 580px; margin: 0 auto; }
+  .last-updated {
+    display: inline-block; margin-top: 14px; font-size: 0.8rem; color: var(--text-muted);
+    background: rgba(255,255,255,0.6); border-radius: 50px;
+    padding: 4px 14px; border: 1px solid rgba(187,210,240,0.6);
+  }
+
+  .app-badges { display: flex; justify-content: center; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+  .app-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.75); border: 1px solid rgba(42,108,196,0.2);
+    border-radius: 50px; padding: 5px 16px; font-size: 0.78rem; font-weight: 500; color: var(--dark);
+  }
+  .app-badge img { width: 24px; height: 24px; display: block; }
+  .app-badge span { color: var(--blue); }
+
+  .toc-wrap { max-width: 800px; margin: 0 auto 24px; padding: 0 24px; }
+  .toc-box {
+    background: rgba(255,255,255,0.65); border: 1px solid rgba(187,210,240,0.8);
+    border-radius: 20px; padding: 32px 40px; backdrop-filter: blur(10px);
+  }
+  .toc-box h2 {
+    font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600;
+    color: var(--dark); margin-bottom: 18px; padding-bottom: 10px;
+    border-bottom: 1px solid rgba(187,210,240,0.7);
+  }
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 24px; }
+  .toc-grid a {
+    color: var(--blue); text-decoration: none; font-size: 0.81rem;
+    padding: 5px 0; border-bottom: 1px solid rgba(187,210,240,0.3); transition: color 0.2s;
+  }
+  .toc-grid a:hover { color: var(--blue-deep); }
+
+  .legal-content { max-width: 800px; margin: 0 auto 80px; padding: 0 24px; }
+  .legal-card {
+    background: rgba(255,255,255,0.7); border: 1px solid rgba(187,210,240,0.8);
+    border-radius: 24px; padding: 52px 56px; backdrop-filter: blur(10px);
+    box-shadow: 0 4px 32px rgba(42,108,196,0.07);
+  }
+
+  .intro-block {
+    background: rgba(42,108,196,0.05); border: 1px solid rgba(42,108,196,0.15);
+    border-radius: 14px; padding: 24px 28px; margin-bottom: 44px;
+  }
+  .intro-block p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 10px; }
+  .intro-block p:last-child { margin-bottom: 0; }
+  .intro-block strong { color: var(--dark); }
+
+  .legal-section { margin-bottom: 42px; scroll-margin-top: 90px; }
+  .legal-section:last-child { margin-bottom: 0; }
+  .legal-section h2 {
+    font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600;
+    color: var(--dark); margin-bottom: 14px; padding-bottom: 10px;
+    border-bottom: 1px solid rgba(187,210,240,0.7);
+  }
+  .legal-section h3 { font-size: 0.95rem; font-weight: 600; color: var(--dark); margin: 18px 0 8px; }
+  .legal-section p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 12px; }
+  .legal-section p:last-child { margin-bottom: 0; }
+  .legal-section ul, .legal-section ol { padding-left: 22px; margin-bottom: 12px; }
+  .legal-section li { font-size: 0.92rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 7px; }
+  .legal-section .caps {
+    font-size: 0.88rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 12px; font-weight: 500;
+  }
+  .notice-box {
+    background: rgba(42,108,196,0.05); border-left: 3px solid var(--blue);
+    border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 14px 0; font-size: 0.88rem;
+    color: var(--text-muted); line-height: 1.7;
+  }
+
+  .contact-box {
+    background: linear-gradient(135deg, rgba(42,108,196,0.08), rgba(187,210,240,0.2));
+    border: 1px solid rgba(42,108,196,0.2); border-radius: 16px; padding: 28px 32px; margin-top: 44px;
+  }
+  .contact-box h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--dark); margin-bottom: 12px; }
+  .contact-box p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 5px; line-height: 1.7; }
+  .contact-box a { color: var(--blue); text-decoration: none; font-weight: 500; }
+
+  footer { background: rgba(14,30,56,0.95); padding: 36px 60px 28px; }
+  .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: #fff; text-decoration: none; }
+  .footer-logo span { color: var(--base); }
+  .footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+  .footer-legal { display: flex; gap: 20px; flex-wrap: wrap; }
+  .footer-legal a { font-size: 0.8rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+  .footer-legal a:hover { color: rgba(255,255,255,0.8); }
+
+  @media (max-width: 680px) {
+    nav { padding: 0 20px; }
+    .legal-card { padding: 32px 22px; }
+    .toc-box { padding: 24px 20px; }
+    .toc-grid { grid-template-columns: 1fr; }
+    footer { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html"><span>Laundr</span>ify</a>
+  <a class="nav-back" href="index.html">Back to Home</a>
+</nav>
+
+<section class="page-hero">
+  <span class="page-tag">Legal</span>
+  <h1>Terms of Service</h1>
+  <p>Please read these terms carefully before using Laundrify. By accessing or using our services, you agree to be bound by them.</p>
+  <span class="last-updated">Last updated: August 20, 2025</span>
+  <div class="app-badges">
+    <span class="app-badge"><img src="assets/icons/adaptive-icon.png" alt="Laundrify"> <span>Laundrify</span> — Customer App</span>
+    <span class="app-badge"><img src="assets/icons/dadaptive-icon.png" alt="Laundrify DryCleaners"> <span>Laundrify DryCleaners</span> — Dry Cleaner App</span>
+  </div>
+</section>
+
+<div class="toc-wrap">
+  <div class="toc-box">
+    <h2>Table of Contents</h2>
+    <div class="toc-grid">
+      <a href="#s1">1. Our Services</a>
+      <a href="#s2">2. Intellectual Property Rights</a>
+      <a href="#s3">3. User Representations</a>
+      <a href="#s4">4. User Registration & Account Deletion</a>
+      <a href="#s5">5. Purchases and Payment</a>
+      <a href="#s6">6. Refund Policy</a>
+      <a href="#s7">7. Prohibited Activities</a>
+      <a href="#s8">8. User Generated Contributions</a>
+      <a href="#s9">9. Contribution License</a>
+      <a href="#s10">10. Mobile Application License</a>
+      <a href="#s11">11. Third-Party Websites and Content</a>
+      <a href="#s12">12. Services Management</a>
+      <a href="#s13">13. Privacy Policy & NDPR Compliance</a>
+      <a href="#s14">14. Data Retention</a>
+      <a href="#s15">15. Copyright Infringements</a>
+      <a href="#s16">16. Term and Termination</a>
+      <a href="#s17">17. Modifications and Interruptions</a>
+      <a href="#s18">18. Dispute Resolution Between Users & Partners</a>
+      <a href="#s19">19. Corrections</a>
+      <a href="#s20">20. Disclaimer</a>
+      <a href="#s21">21. Limitations of Liability</a>
+      <a href="#s22">22. Indemnification</a>
+      <a href="#s23">23. User Data</a>
+      <a href="#s24">24. Electronic Communications</a>
+      <a href="#s25">25. Miscellaneous</a>
+      <a href="#s26">26. Fees, Commissions & Pricing</a>
+      <a href="#s27">27. Payouts to DryCleaners</a>
+      <a href="#s28">28. Taxes & Compliance</a>
+      <a href="#s29">29. Service Provider Independence</a>
+      <a href="#s30">30. No Liability for User-Provided Items</a>
+      <a href="#s31">31. User Conduct & Prohibited Activities</a>
+      <a href="#s32">32. Ratings & Reviews</a>
+      <a href="#s33">33. Force Majeure</a>
+      <a href="#s34">34. Changes to Services / Terms</a>
+      <a href="#s35">35. Governing Law & Dispute Resolution</a>
+      <a href="#s36">36. Contact Us</a>
+    </div>
+  </div>
+</div>
+
+<div class="legal-content">
+  <div class="legal-card">
+
+    <div class="intro-block">
+      <p>We are <strong>Unang Tech</strong> ("Company," "we," "us," "our"), a business operating in Nigeria at 24 Lunguda street, G/lada, G/lada, Federal capital territory 902301.</p>
+      <p>We operate two mobile applications: <strong>Laundrify</strong> (the customer-facing app for booking laundry and dry cleaning services) and <strong>Laundrify DryCleaners</strong> (the partner-facing app for dry cleaning businesses to manage orders, track earnings, and connect with customers). Together, these applications and any related products or services that refer or link to these Legal Terms are collectively referred to as the <strong>"Services."</strong></p>
+      <p>These Legal Terms apply to all users of both the Laundrify customer app and the Laundrify DryCleaners dry cleaner app. Where a term applies specifically to one user type only, this is clearly stated.</p>
+      <p>You can contact us by phone at <a href="tel:+2347040745661" style="color:var(--blue);">+2347040745661</a>, by email at <a href="mailto:support@laundrify.com.ng" style="color:var(--blue);">support@laundrify.com.ng</a>, or by mail to 24 Lunguda street, G/lada, G/lada, Federal capital territory 902301, Nigeria.</p>
+      <p>These Legal Terms constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you"), and Unang Tech, concerning your access to and use of the Services. You agree that by accessing the Services, you have read, understood, and agreed to be bound by all of these Legal Terms. <strong>IF YOU DO NOT AGREE WITH ALL OF THESE LEGAL TERMS, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SERVICES AND YOU MUST DISCONTINUE USE IMMEDIATELY.</strong></p>
+      <p>We will provide you with prior notice of any scheduled changes to the Services. The modified Legal Terms will become effective upon posting or notifying you by email at support@laundrify.com.ng. By continuing to use the Services after the effective date of any changes, you agree to be bound by the modified terms.</p>
+      <p>The Services are intended for users who are at least 18 years old. Persons under the age of 18 are not permitted to use or register for the Services. By registering, you confirm that you are 18 or older. We reserve the right to terminate any account found to be in violation of this requirement.</p>
+      <p>We recommend that you print or save a copy of these Legal Terms for your records.</p>
+    </div>
+
+    <div class="legal-section" id="s1">
+      <h2>1. Our Services</h2>
+      <p>Laundrify is a technology marketplace platform that connects customers who need laundry and dry cleaning services with independent dry cleaning businesses ("Partners"). We do not ourselves provide laundry or dry cleaning services. We provide the platform, tools, and infrastructure that facilitate these connections.</p>
+      <p>The information provided when using the Services is not intended for distribution to or use by any person or entity in any jurisdiction or country where such distribution or use would be contrary to law or regulation or which would subject us to any registration requirement. Those who choose to access the Services from other locations do so on their own initiative and are solely responsible for compliance with local laws.</p>
+      <div class="notice-box">
+        <strong>For Customers (Laundrify app):</strong> You may use the platform to browse available dry cleaners, schedule pickups, track orders, make payments, and leave reviews.<br><br>
+        <strong>For Partners (Laundrify DryCleaners app):</strong> You may use the platform to receive and manage orders, set pricing, communicate with customers, and receive payouts for completed services.
+      </div>
+    </div>
+
+    <div class="legal-section" id="s2">
+      <h2>2. Intellectual Property Rights</h2>
+      <h3>Our intellectual property</h3>
+      <p>We are the owner or the licensee of all intellectual property rights in our Services, including all source code, databases, functionality, software, website designs, audio, video, text, photographs, and graphics in the Services (collectively, the "Content"), as well as the trademarks, service marks, and logos contained therein (the "Marks").</p>
+      <p>Our Content and Marks are protected by copyright and trademark laws and treaties around the world. The Content and Marks are provided in or through the Services "AS IS" for your personal, non-commercial use or internal business purpose only.</p>
+
+      <h3>Your use of our Services</h3>
+      <p>Subject to your compliance with these Legal Terms, we grant you a non-exclusive, non-transferable, revocable license to access the Services and download or print a copy of any portion of the Content to which you have properly gained access, solely for your personal, non-commercial use or internal business purpose.</p>
+      <p>No part of the Services and no Content or Marks may be copied, reproduced, aggregated, republished, uploaded, posted, publicly displayed, encoded, translated, transmitted, distributed, sold, licensed, or otherwise exploited for any commercial purpose whatsoever, without our express prior written permission.</p>
+      <p>We reserve all rights not expressly granted to you in and to the Services, Content, and Marks. Any breach of these Intellectual Property Rights will constitute a material breach of our Legal Terms and your right to use our Services will terminate immediately.</p>
+
+      <h3>Your submissions and contributions</h3>
+      <p><strong>Submissions:</strong> By directly sending us any question, comment, suggestion, idea, feedback, or other information about the Services, you agree to assign to us all intellectual property rights in such Submission. We shall own this Submission and be entitled to its unrestricted use for any lawful purpose without acknowledgment or compensation to you.</p>
+      <p><strong>Contributions:</strong> The Services may invite you to create, submit, post, display, transmit, or broadcast content including text, writings, video, audio, photographs, comments, reviews, and rating suggestions ("Contributions"). Any publicly posted Submission shall also be treated as a Contribution. You understand that Contributions may be viewable by other users of the Services.</p>
+      <p><strong>When you post Contributions, you grant us a license:</strong> By posting any Contributions, you grant us an unrestricted, unlimited, irrevocable, perpetual, non-exclusive, transferable, royalty-free, fully-paid, worldwide right and license to use, copy, reproduce, distribute, sell, publish, broadcast, reformat, translate, and exploit your Contributions for any purpose, and to sublicense these rights. Our use and distribution may occur in any media formats and through any media channels.</p>
+      <p><strong>You are responsible for what you post:</strong> You confirm that your Contributions are not illegal, harassing, hateful, harmful, defamatory, obscene, bullying, abusive, discriminatory, sexually explicit, false, inaccurate, deceitful, or misleading; that you have all necessary rights and permissions to post them; and that they do not constitute confidential information. You are solely responsible for your Contributions and agree to reimburse us for any losses caused by your breach of these obligations.</p>
+      <p><strong>We may remove or edit your Content:</strong> We shall have the right to remove or edit any Contributions at any time without notice if we consider them harmful or in breach of these Legal Terms. We may also suspend or disable your account and report you to the relevant authorities.</p>
+    </div>
+
+    <div class="legal-section" id="s3">
+      <h2>3. User Representations</h2>
+      <p>By using the Services, you represent and warrant that: (1) all registration information you submit will be true, accurate, current, and complete; (2) you will maintain the accuracy of such information and promptly update it as necessary; (3) you have the legal capacity to agree to these Legal Terms; (4) you are not a minor in the jurisdiction in which you reside; (5) you will not access the Services through automated or non-human means; (6) you will not use the Services for any illegal or unauthorized purpose; and (7) your use of the Services will not violate any applicable law or regulation.</p>
+      <p>If you provide any information that is untrue, inaccurate, not current, or incomplete, we have the right to suspend or terminate your account and refuse any and all current or future use of the Services.</p>
+      <p><strong>For Partners (Laundrify DryCleaners):</strong> You additionally represent and warrant that your business is legitimate, that you hold any required local licences or permits to operate a laundry or dry cleaning business, and that the information you provide about your services, pricing, and capacity is accurate.</p>
+    </div>
+
+    <div class="legal-section" id="s4">
+      <h2>4. User Registration & Account Deletion</h2>
+      <p>You are required to register to use the Services. You agree to keep your password confidential and will be responsible for all use of your account and password. We reserve the right to remove, reclaim, or change a username you select if we determine, in our sole discretion, that such username is inappropriate, obscene, or otherwise objectionable.</p>
+      <p>You are responsible for notifying us immediately of any unauthorized use of your account or any other breach of security.</p>
+      <h3>Account Deletion</h3>
+      <p>You may delete your account at any time from within the Laundrify or Laundrify DryCleaners app settings. Upon deletion of your account, all personal data associated with your account will be permanently and irreversibly deleted from our systems immediately. This includes your profile information, order history, and any stored preferences. This action cannot be undone.</p>
+      <p>Please note that if you have any outstanding orders, active disputes, or pending payouts at the time of deletion, you should resolve these before deleting your account. We cannot recover data or process pending payouts after account deletion.</p>
+    </div>
+
+    <div class="legal-section" id="s5">
+      <h2>5. Purchases and Payment</h2>
+      <p>We accept the following forms of payment:</p>
+      <ul>
+        <li>Mastercard</li>
+        <li>Visa</li>
+        <li>Bank Transfer</li>
+        <li>Paystack</li>
+        <li>USSD</li>
+      </ul>
+      <p>All payments are processed in Nigerian Naira (NGN). You agree to provide current, complete, and accurate payment and account information for all purchases made via the Services. You further agree to promptly update your payment information, including email address, payment method, and card expiration date, so that we can complete your transactions.</p>
+      <p>You agree to pay all charges at the prices then in effect for your orders. We reserve the right to correct any errors or mistakes in pricing, even if we have already requested or received payment. We may change prices at any time, with changes effective upon posting in the app.</p>
+      <p>We reserve the right to refuse any order placed through the Services at our sole discretion.</p>
+    </div>
+
+    <div class="legal-section" id="s6">
+      <h2>6. Refund Policy</h2>
+      <p>Our refund policy is set out in full in our <a href="refund-policy.html" style="color:var(--blue); font-weight:500;">Refund Policy</a>, which is incorporated into these Legal Terms by reference. Please read it carefully before placing an order.</p>
+      <p>By using the Services, you agree to the terms of our Refund Policy. In the event of any conflict between these Terms of Service and the Refund Policy on matters relating to refunds, the Refund Policy shall prevail.</p>
+    </div>
+
+    <div class="legal-section" id="s7">
+      <h2>7. Prohibited Activities</h2>
+      <p>You may not access or use the Services for any purpose other than that for which we make the Services available. As a user of the Services, you agree not to:</p>
+      <ul>
+        <li>Systematically retrieve data or other content from the Services to create or compile, directly or indirectly, a collection, compilation, database, or directory without written permission from us.</li>
+        <li>Trick, defraud, or mislead us and other users, especially in any attempt to learn sensitive account information such as user passwords.</li>
+        <li>Circumvent, disable, or otherwise interfere with security-related features of the Services.</li>
+        <li>Disparage, tarnish, or otherwise harm, in our opinion, us and/or the Services.</li>
+        <li>Use any information obtained from the Services in order to harass, abuse, or harm another person.</li>
+        <li>Make improper use of our support services or submit false reports of abuse or misconduct.</li>
+        <li>Use the Services in a manner inconsistent with any applicable laws or regulations.</li>
+        <li>Engage in unauthorized framing of or linking to the Services.</li>
+        <li>Upload or transmit viruses, Trojan horses, or other malicious material that interferes with any party's use of the Services.</li>
+        <li>Engage in any automated use of the system, including scripts, data mining robots, or similar data gathering tools.</li>
+        <li>Delete the copyright or other proprietary rights notice from any Content.</li>
+        <li>Attempt to impersonate another user or person or use the username of another user.</li>
+        <li>Interfere with, disrupt, or create an undue burden on the Services or the networks connected to the Services.</li>
+        <li>Harass, annoy, intimidate, or threaten any of our employees or agents.</li>
+        <li>Attempt to bypass any measures of the Services designed to prevent or restrict access.</li>
+        <li>Copy or adapt the Services' software, including but not limited to Flash, PHP, HTML, JavaScript, or other code.</li>
+        <li>Decipher, decompile, disassemble, or reverse engineer any of the software comprising the Services, except as permitted by applicable law.</li>
+        <li>Use, launch, develop, or distribute any automated system including any spider, robot, cheat utility, scraper, or offline reader that accesses the Services.</li>
+        <li>Use a buying agent or purchasing agent to make purchases on the Services.</li>
+        <li>Make any unauthorized use of the Services, including collecting user email addresses for sending unsolicited email.</li>
+        <li>Use the Services as part of any effort to compete with us or for any revenue-generating endeavor not expressly approved by us.</li>
+        <li>Creating multiple partner accounts to manipulate ratings, orders, or payouts.</li>
+        <li>Impersonating another laundry business, falsifying business credentials, or providing inaccurate information about services, capacity, or certifications.</li>
+        <li>Harassing, threatening, or abusing customers, platform staff, or other partners via the app.</li>
+        <li>Posting false, misleading, or retaliatory reviews or ratings about customers or the platform.</li>
+        <li>Attempting to hack, scrape, reverse-engineer, or interfere with the app or platform systems.</li>
+        <li>Failing to process orders in a timely manner without valid reason (e.g., repeated delays or cancellations after acceptance without notification).</li>
+        <li>Mishandling or damaging items due to negligence (e.g., not following care labels when disclosed, mixing incompatible loads).</li>
+        <li>Accepting or processing prohibited or hazardous items without rejection or notification, including: heavily contaminated items (bodily fluids, human/animal waste, blood, feces, or biohazards); pest-infested items (bedbugs, lice, rodents); hazardous materials (flammables, chemicals, batteries, explosives, sharps/needles, oils/paints); or illegal or contraband items.</li>
+        <li>Providing substandard services that violate platform quality standards, leading to frequent customer complaints.</li>
+        <li>Failing to inspect items properly before processing (e.g., not checking for items left in pockets that could cause damage such as pens, lighters, or knives).</li>
+        <li>Soliciting, accepting, or requesting payments, tips, cash, or any form of compensation outside the Laundrify platform.</li>
+        <li>Offering or providing services to customers off-platform after initial contact via Laundrify, or exchanging personal contacts to circumvent commissions.</li>
+        <li>Manipulating pricing, surcharges, or add-ons in ways not approved by the platform, including hidden fees or unauthorized upcharges.</li>
+        <li>Using the app to launder money, facilitate illegal transactions, or engage in fraud.</li>
+        <li>Providing false information about order status, item conditions, or reasons for issues or rejections.</li>
+        <li>Interfering with service logistics (e.g., not being available for scheduled pickups or drop-offs repeatedly, or directing partners to unsafe or unauthorized locations).</li>
+        <li>Tampering with platform-provided bags, tags, equipment, or tracking mechanisms.</li>
+        <li>Engaging in unsafe practices during service interactions, including aggressive behavior toward other users or platform staff.</li>
+        <li>Spamming, soliciting unrelated business, or advertising competing services within the app.</li>
+        <li>Discriminating against customers based on protected characteristics or refusing orders without legitimate operational reasons.</li>
+        <li>Violating health and safety regulations applicable to laundry operations.</li>
+      </ul>
+    </div>
+
+    <div class="legal-section" id="s8">
+      <h2>8. User Generated Contributions</h2>
+      <p>The Services may invite you to chat, contribute to, or participate in blogs, message boards, online forums, and other functionality, and may provide you with the opportunity to create, submit, post, display, transmit, perform, publish, distribute, or broadcast content and materials, including text, writings, video, audio, photographs, graphics, comments, suggestions, or personal information (collectively, "Contributions"). Contributions may be viewable by other users of the Services and through third-party websites. As such, any Contributions you transmit may be treated as non-confidential and non-proprietary. When you create or make available any Contributions, you thereby represent and warrant that:</p>
+      <ul>
+        <li>The creation, distribution, transmission, public display, or performance, and the accessing, downloading, or copying of your Contributions do not and will not infringe the proprietary rights of any third party.</li>
+        <li>You are the creator and owner of or have the necessary licenses, rights, consents, and permissions to use and to authorize us and other users to use your Contributions.</li>
+        <li>You have the written consent of each identifiable individual person in your Contributions to use their name or likeness.</li>
+        <li>Your Contributions are not false, inaccurate, or misleading.</li>
+        <li>Your Contributions are not unsolicited or unauthorized advertising, promotional materials, pyramid schemes, chain letters, spam, or other forms of solicitation.</li>
+        <li>Your Contributions are not obscene, lewd, lascivious, filthy, violent, harassing, libelous, slanderous, or otherwise objectionable.</li>
+        <li>Your Contributions do not ridicule, mock, disparage, intimidate, or abuse anyone.</li>
+        <li>Your Contributions are not used to harass or threaten any other person or to promote violence against a specific person or class of people.</li>
+        <li>Your Contributions do not violate any applicable law, regulation, or rule.</li>
+        <li>Your Contributions do not violate the privacy or publicity rights of any third party.</li>
+        <li>Your Contributions do not violate any applicable law concerning child pornography or otherwise intended to protect the health or well-being of minors.</li>
+        <li>Your Contributions do not include any offensive comments connected to race, national origin, gender, sexual preference, or physical handicap.</li>
+        <li>Your Contributions do not otherwise violate, or link to material that violates, any provision of these Legal Terms or any applicable law or regulation.</li>
+      </ul>
+      <p>Any use of the Services in violation of the foregoing violates these Legal Terms and may result in termination or suspension of your rights to use the Services.</p>
+    </div>
+
+    <div class="legal-section" id="s9">
+      <h2>9. Contribution License</h2>
+      <p>By posting your Contributions to any part of the Services, you automatically grant, and you represent and warrant that you have the right to grant, to us an unrestricted, unlimited, irrevocable, perpetual, non-exclusive, transferable, royalty-free, fully-paid, worldwide right and license to host, use, copy, reproduce, disclose, sell, resell, publish, broadcast, retitle, archive, store, cache, publicly perform, publicly display, reformat, translate, transmit, excerpt, and distribute such Contributions for any purpose, commercial, advertising, or otherwise, and to prepare derivative works of, or incorporate into other works, such Contributions. The use and distribution may occur in any media formats and through any media channels.</p>
+      <p>This license will apply to any form, media, or technology now known or hereafter developed. You waive all moral rights in your Contributions. We do not assert any ownership over your Contributions. You retain full ownership of all of your Contributions and any associated intellectual property rights. We have the right, in our sole discretion, to edit, redact, re-categorize, or delete any Contributions at any time and for any reason, without notice.</p>
+    </div>
+
+    <div class="legal-section" id="s10">
+      <h2>10. Mobile Application License</h2>
+      <h3>Use License</h3>
+      <p>If you access the Services via the App, then we grant you a revocable, non-exclusive, non-transferable, limited right to install and use the App on wireless electronic devices owned or controlled by you, strictly in accordance with these Legal Terms. You shall not: (1) decompile, reverse engineer, disassemble, or decrypt the App; (2) make any modification, adaptation, improvement, enhancement, translation, or derivative work from the App; (3) violate any applicable laws or regulations in connection with your use of the App; (4) remove, alter, or obscure any proprietary notice posted by us or the licensors of the App; (5) use the App for any revenue-generating endeavor or other purpose for which it is not designed or intended; (6) make the App available over a network permitting access or use by multiple devices simultaneously; (7) use the App to create a product, service, or software that is competitive with or a substitute for the App; (8) use the App to send automated queries or unsolicited commercial communications; or (9) use any proprietary information or our intellectual property in the design, development, manufacture, licensing, or distribution of any applications, accessories, or devices for use with the App.</p>
+      <h3>Apple and Android Devices</h3>
+      <p>The following terms apply when you use the App obtained from either the Apple App Store or Google Play (each an "App Distributor"): (1) the license granted to you is limited to a non-transferable license to use the App on a device that utilizes the Apple iOS or Android operating systems, as applicable; (2) we are responsible for providing maintenance and support services for the App as required under applicable law; (3) in the event of any failure of the App to conform to any applicable warranty, you may notify the applicable App Distributor, who may refund the purchase price if any was paid; (4) you represent and warrant that you are not located in a country subject to a US government embargo or designated as a "terrorist supporting" country, and are not listed on any US government list of prohibited or restricted parties; (5) you must comply with applicable third-party terms of agreement when using the App; and (6) the App Distributors are third-party beneficiaries of the terms of this mobile application license and will have the right to enforce these terms against you as a third-party beneficiary.</p>
+    </div>
+
+    <div class="legal-section" id="s11">
+      <h2>11. Third-Party Websites and Content</h2>
+      <p>The Services may contain links to other websites ("Third-Party Websites") as well as content belonging to or originating from third parties ("Third-Party Content"). Such Third-Party Websites and Third-Party Content are not investigated, monitored, or checked for accuracy, appropriateness, or completeness by us, and we are not responsible for any Third-Party Websites accessed through the Services or any Third-Party Content posted on, available through, or installed from the Services. Inclusion of, linking to, or permitting the use or installation of any Third-Party Websites or Third-Party Content does not imply approval or endorsement thereof by us. If you decide to leave the Services and access Third-Party Websites, you do so at your own risk and these Legal Terms no longer govern. Any purchases you make through Third-Party Websites are exclusively between you and the applicable third party, and we take no responsibility whatsoever in relation to such purchases. You agree to hold us blameless from any harm caused by your purchase or use of such third-party products or services.</p>
+    </div>
+
+    <div class="legal-section" id="s12">
+      <h2>12. Services Management</h2>
+      <p>We reserve the right, but not the obligation, to: (1) monitor the Services for violations of these Legal Terms; (2) take appropriate legal action against anyone who, in our sole discretion, violates the law or these Legal Terms, including reporting such user to law enforcement authorities; (3) refuse, restrict access to, limit the availability of, or disable any of your Contributions or any portion thereof; (4) remove from the Services or otherwise disable all files and content that are excessive in size or are in any way burdensome to our systems; and (5) otherwise manage the Services in a manner designed to protect our rights and property and to facilitate the proper functioning of the Services.</p>
+    </div>
+
+    <div class="legal-section" id="s13">
+      <h2>13. Privacy Policy & NDPR Compliance</h2>
+      <p>We care about data privacy and security. Please review our full <a href="privacy-policy.html" style="color:var(--blue); font-weight:500;">Privacy Policy</a> at laundrify.com.ng/privacy-policy. By using the Services, you agree to be bound by our Privacy Policy, which is incorporated into these Legal Terms by reference.</p>
+      <p>We are committed to compliance with the Nigeria Data Protection Regulation (NDPR) issued by the National Information Technology Development Agency (NITDA). As a data controller, we process your personal data lawfully, fairly, and transparently. We only collect personal data that is adequate, relevant, and limited to what is necessary in relation to the purposes for which it is processed.</p>
+      <p>The Services are hosted in Nigeria. If you access the Services from any other region of the world with laws governing personal data collection, use, or disclosure that differ from applicable laws in Nigeria, then through your continued use of the Services, you are transferring your data to Nigeria, and you expressly consent to have your data transferred to and processed in Nigeria.</p>
+      <p>Under the NDPR, you have the right to: access your personal data; rectify inaccurate data; request erasure of your data (see Account Deletion in Section 4); object to the processing of your data; and lodge a complaint with NITDA if you believe your data rights have been violated. To exercise any of these rights, contact us at <a href="mailto:support@laundrify.com.ng" style="color:var(--blue);">support@laundrify.com.ng</a>.</p>
+    </div>
+
+    <div class="legal-section" id="s14">
+      <h2>14. Data Retention</h2>
+      <p>We retain personal data only for as long as is necessary to fulfil the purposes for which it was collected, including for the purposes of satisfying any legal, accounting, or reporting requirements.</p>
+      <p>When you delete your account, all personal data associated with your account is permanently and immediately deleted from our active systems as described in Section 4. Certain data may be retained in backup systems for a period of up to 30 days after account deletion, after which it is permanently purged. Anonymised, aggregated data that cannot be used to identify you may be retained indefinitely for analytics purposes.</p>
+      <p>For Partners, we may retain transaction records and payout history for a period required under Nigerian tax and financial regulations, even after account deletion, where we are legally obligated to do so.</p>
+    </div>
+
+    <div class="legal-section" id="s15">
+      <h2>15. Copyright Infringements</h2>
+      <p>We respect the intellectual property rights of others. If you believe that any material available on or through the Services infringes upon any copyright you own or control, please immediately notify us using the contact information provided in Section 36. Please be advised that pursuant to applicable law you may be held liable for damages if you make material misrepresentations in a copyright notification. If you are not sure that material located on or linked to by the Services infringes your copyright, you should consider first contacting an attorney.</p>
+    </div>
+
+    <div class="legal-section" id="s16">
+      <h2>16. Term and Termination</h2>
+      <p>These Legal Terms shall remain in full force and effect while you use the Services. WE RESERVE THE RIGHT TO, IN OUR SOLE DISCRETION AND WITHOUT NOTICE OR LIABILITY, DENY ACCESS TO AND USE OF THE SERVICES (INCLUDING BLOCKING CERTAIN IP ADDRESSES), TO ANY PERSON FOR ANY REASON OR FOR NO REASON, INCLUDING WITHOUT LIMITATION FOR BREACH OF ANY REPRESENTATION, WARRANTY, OR COVENANT CONTAINED IN THESE LEGAL TERMS OR OF ANY APPLICABLE LAW OR REGULATION. WE MAY TERMINATE YOUR USE OR PARTICIPATION IN THE SERVICES OR DELETE YOUR ACCOUNT AND ANY CONTENT OR INFORMATION THAT YOU POSTED AT ANY TIME, WITHOUT WARNING, IN OUR SOLE DISCRETION.</p>
+      <p>If we terminate or suspend your account for any reason, you are prohibited from registering and creating a new account under your name, a fake or borrowed name, or the name of any third party. In addition to terminating or suspending your account, we reserve the right to take appropriate legal action, including pursuing civil, criminal, and injunctive redress.</p>
+    </div>
+
+    <div class="legal-section" id="s17">
+      <h2>17. Modifications and Interruptions</h2>
+      <p>We reserve the right to change, modify, or remove the contents of the Services at any time or for any reason at our sole discretion without notice. We have no obligation to update any information on our Services. We also reserve the right to modify or discontinue all or part of the Services without notice at any time. We will not be liable to you or any third party for any modification, price change, suspension, or discontinuance of the Services.</p>
+      <p>We cannot guarantee the Services will be available at all times. We may experience hardware, software, or other problems or need to perform maintenance, resulting in interruptions, delays, or errors. We have no liability whatsoever for any loss, damage, or inconvenience caused by your inability to access or use the Services during any downtime or discontinuance of the Services.</p>
+    </div>
+
+    <div class="legal-section" id="s18">
+      <h2>18. Dispute Resolution Between Users & Partners</h2>
+      <p>We encourage all users and partners to resolve disputes amicably and in good faith. If you experience a problem with a service, order, or another user on the platform, the following process applies:</p>
+      <ol>
+        <li><strong>Contact Support first:</strong> Report the issue to Laundrify support at <a href="mailto:support@laundrify.com.ng" style="color:var(--blue);">support@laundrify.com.ng</a>. We will attempt to mediate and facilitate a resolution between the relevant parties within a reasonable timeframe.</li>
+        <li><strong>If unresolved:</strong> Either party may escalate the matter to formal dispute resolution as described in Section 35 (Governing Law & Dispute Resolution).</li>
+      </ol>
+      <p>Laundrify acts as a neutral intermediary in such disputes and is not a party to the service contract between customers and dry cleaning partners. Our decisions in platform-level disputes (such as refund approvals or account suspensions) are final and binding within the scope of the platform.</p>
+    </div>
+
+    <div class="legal-section" id="s19">
+      <h2>19. Corrections</h2>
+      <p>There may be information on the Services that contains typographical errors, inaccuracies, or omissions, including descriptions, pricing, availability, and various other information. We reserve the right to correct any errors, inaccuracies, or omissions and to change or update the information on the Services at any time, without prior notice.</p>
+    </div>
+
+    <div class="legal-section" id="s20">
+      <h2>20. Disclaimer</h2>
+      <p class="caps">THE SERVICES ARE PROVIDED ON AN AS-IS AND AS-AVAILABLE BASIS. YOU AGREE THAT YOUR USE OF THE SERVICES WILL BE AT YOUR SOLE RISK. TO THE FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, IN CONNECTION WITH THE SERVICES AND YOUR USE THEREOF, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE MAKE NO WARRANTIES OR REPRESENTATIONS ABOUT THE ACCURACY OR COMPLETENESS OF THE SERVICES' CONTENT OR THE CONTENT OF ANY WEBSITES OR MOBILE APPLICATIONS LINKED TO THE SERVICES AND WE WILL ASSUME NO LIABILITY OR RESPONSIBILITY FOR ANY (1) ERRORS, MISTAKES, OR INACCURACIES OF CONTENT AND MATERIALS, (2) PERSONAL INJURY OR PROPERTY DAMAGE OF ANY NATURE WHATSOEVER RESULTING FROM YOUR USE OF THE SERVICES, (3) ANY UNAUTHORIZED ACCESS TO OR USE OF OUR SECURE SERVERS AND/OR ANY AND ALL PERSONAL INFORMATION AND/OR FINANCIAL INFORMATION STORED THEREIN, (4) ANY INTERRUPTION OR CESSATION OF TRANSMISSION TO OR FROM THE SERVICES, (5) ANY BUGS, VIRUSES, TROJAN HORSES, OR THE LIKE WHICH MAY BE TRANSMITTED TO OR THROUGH THE SERVICES BY ANY THIRD PARTY, AND/OR (6) ANY ERRORS OR OMISSIONS IN ANY CONTENT AND MATERIALS OR FOR ANY LOSS OR DAMAGE OF ANY KIND INCURRED AS A RESULT OF THE USE OF ANY CONTENT POSTED, TRANSMITTED, OR OTHERWISE MADE AVAILABLE VIA THE SERVICES. WE DO NOT WARRANT, ENDORSE, GUARANTEE, OR ASSUME RESPONSIBILITY FOR ANY PRODUCT OR SERVICE ADVERTISED OR OFFERED BY A THIRD PARTY THROUGH THE SERVICES. AS WITH THE PURCHASE OF A PRODUCT OR SERVICE THROUGH ANY MEDIUM OR IN ANY ENVIRONMENT, YOU SHOULD USE YOUR BEST JUDGMENT AND EXERCISE CAUTION WHERE APPROPRIATE.</p>
+    </div>
+
+    <div class="legal-section" id="s21">
+      <h2>21. Limitations of Liability</h2>
+      <p class="caps">IN NO EVENT WILL WE OR OUR DIRECTORS, EMPLOYEES, OR AGENTS BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY DIRECT, INDIRECT, CONSEQUENTIAL, EXEMPLARY, INCIDENTAL, SPECIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFIT, LOST REVENUE, LOSS OF DATA, OR OTHER DAMAGES ARISING FROM YOUR USE OF THE SERVICES, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. NOTWITHSTANDING ANYTHING TO THE CONTRARY CONTAINED HEREIN, OUR LIABILITY TO YOU FOR ANY CAUSE WHATSOEVER AND REGARDLESS OF THE FORM OF THE ACTION, WILL AT ALL TIMES BE LIMITED TO THE LESSER OF THE AMOUNT PAID, IF ANY, BY YOU TO US DURING THE SIX (6) MONTH PERIOD PRIOR TO ANY CAUSE OF ACTION ARISING OR NGN250,000. CERTAIN LAWS DO NOT ALLOW LIMITATIONS ON IMPLIED WARRANTIES OR THE EXCLUSION OR LIMITATION OF CERTAIN DAMAGES. IF THESE LAWS APPLY TO YOU, SOME OR ALL OF THE ABOVE DISCLAIMERS OR LIMITATIONS MAY NOT APPLY TO YOU, AND YOU MAY HAVE ADDITIONAL RIGHTS.</p>
+    </div>
+
+    <div class="legal-section" id="s22">
+      <h2>22. Indemnification</h2>
+      <p>You agree to defend, indemnify, and hold us harmless, including our subsidiaries, affiliates, and all of our respective officers, agents, partners, and employees, from and against any loss, damage, liability, claim, or demand, including reasonable attorneys' fees and expenses, made by any third party due to or arising out of: (1) your Contributions; (2) use of the Services; (3) breach of these Legal Terms; (4) any breach of your representations and warranties set forth in these Legal Terms; (5) your violation of the rights of a third party, including but not limited to intellectual property rights; or (6) any overt harmful act toward any other user of the Services with whom you connected via the Services. We reserve the right, at your expense, to assume the exclusive defense and control of any matter for which you are required to indemnify us, and you agree to cooperate with our defense of such claims.</p>
+    </div>
+
+    <div class="legal-section" id="s23">
+      <h2>23. User Data</h2>
+      <p>We will maintain certain data that you transmit to the Services for the purpose of managing the performance of the Services. Although we perform regular routine backups of data, you are solely responsible for all data that you transmit or that relates to any activity you have undertaken using the Services. You agree that we shall have no liability to you for any loss or corruption of any such data, and you hereby waive any right of action against us arising from any such loss or corruption of such data.</p>
+    </div>
+
+    <div class="legal-section" id="s24">
+      <h2>24. Electronic Communications, Transactions, and Signatures</h2>
+      <p>Visiting the Services, sending us emails, and completing online forms constitute electronic communications. You consent to receive electronic communications, and you agree that all agreements, notices, disclosures, and other communications we provide to you electronically satisfy any legal requirement that such communication be in writing. YOU HEREBY AGREE TO THE USE OF ELECTRONIC SIGNATURES, CONTRACTS, ORDERS, AND OTHER RECORDS, AND TO ELECTRONIC DELIVERY OF NOTICES, POLICIES, AND RECORDS OF TRANSACTIONS INITIATED OR COMPLETED BY US OR VIA THE SERVICES. You hereby waive any rights or requirements under any statutes, regulations, rules, ordinances, or other laws in any jurisdiction which require an original signature or delivery or retention of non-electronic records, or to payments or the granting of credits by any means other than electronic means.</p>
+    </div>
+
+    <div class="legal-section" id="s25">
+      <h2>25. Miscellaneous</h2>
+      <p>These Legal Terms and any policies or operating rules posted by us on the Services constitute the entire agreement and understanding between you and us. Our failure to exercise or enforce any right or provision of these Legal Terms shall not operate as a waiver of such right or provision. These Legal Terms operate to the fullest extent permissible by law. We may assign any or all of our rights and obligations to others at any time. If any provision or part of a provision of these Legal Terms is determined to be unlawful, void, or unenforceable, that provision is deemed severable from these Legal Terms and does not affect the validity and enforceability of any remaining provisions. There is no joint venture, partnership, employment, or agency relationship created between you and us as a result of these Legal Terms or use of the Services. You agree that these Legal Terms will not be construed against us by virtue of having drafted them. You hereby waive any and all defenses you may have based on the electronic form of these Legal Terms and the lack of signing by the parties hereto to execute these Legal Terms.</p>
+    </div>
+
+    <div class="legal-section" id="s26">
+      <h2>26. Fees, Commissions & Pricing</h2>
+      <p>We may charge a platform/service fee (our commission, typically 15–25% of the order subtotal) deducted from amounts payable to the laundry partner. The exact commission rate applicable to a Partner will be communicated at the time of onboarding and may be updated with prior notice.</p>
+      <p>Customers agree to pay the full quoted amount at the time of booking or upon completion of service. Prices may vary based on location, demand, item type, or promotions. We reserve the right to change platform pricing at any time, with changes effective upon posting in the app.</p>
+    </div>
+
+    <div class="legal-section" id="s27">
+      <h2>27. Payouts to DryCleaners</h2>
+      <p>Registered Laundrify DryCleaners partners will receive payouts for completed services (minus our commission and any applicable deductions) on a schedule communicated at onboarding, via bank transfer or mobile money to the registered account. We may withhold payouts for disputed orders, fraud investigations, or breach of these Terms until the matter is resolved. Partners are solely responsible for all taxes on their earnings from the platform.</p>
+    </div>
+
+    <div class="legal-section" id="s28">
+      <h2>28. Taxes & Compliance</h2>
+      <p>You are solely responsible for any taxes, duties, or levies applicable to your use of the Services or earnings derived from the platform, including but not limited to VAT and income tax as applicable under Nigerian law. We may deduct and remit applicable taxes as required by Nigerian law, including via withholding. Partners are responsible for ensuring their business activities are compliant with all applicable Nigerian federal and state tax regulations.</p>
+    </div>
+
+    <div class="legal-section" id="s29">
+      <h2>29. Service Provider Independence Clause</h2>
+      <p>The laundry service providers (dry cleaners and partners) who use Laundrify DryCleaners are independent third-party contractors and are not employees, agents, or partners of Laundrify or Unang Tech. We act solely as a technology platform facilitating connections between customers and service providers. We do not control, supervise, or direct the performance of services by laundry partners. Partners retain full discretion over how they deliver their services, subject to our platform standards and these Terms.</p>
+      <p>Any disputes regarding service quality, damage, loss, delay, or pricing are solely between the customer and the laundry partner. Laundrify's role in such disputes is limited to providing a mediation channel as described in Section 18.</p>
+      <p>Partners who choose to arrange delivery of completed orders do so independently. Laundrify does not operate a delivery service, and any delivery arrangements made by partners are solely their responsibility. Laundrify is not liable for any loss, damage, delay, or incident arising from delivery activities carried out by partners or any third parties they engage.</p>
+    </div>
+
+    <div class="legal-section" id="s30">
+      <h2>30. No Liability for User-Provided Items / Content</h2>
+      <p>You are solely responsible for the items you submit for cleaning, laundry, or dry cleaning. We are not responsible for any loss, damage, discoloration, shrinkage, or other issues arising from the nature, condition, or material of your items, improper labeling, pre-existing damage, or failure to disclose special care instructions. We strongly recommend you inspect and remove valuables from garments before handover.</p>
+    </div>
+
+    <div class="legal-section" id="s31">
+      <h2>31. User Conduct & Prohibited Activities</h2>
+      <p>In addition to the general prohibited activities listed in Section 7, you specifically agree not to: use the Services for any illegal purpose or in violation of any applicable law; submit false, misleading, or fraudulent information to the platform; harass, threaten, or abuse laundry partners or other users; attempt to circumvent, manipulate, or interfere with pricing, ratings, or matching algorithms; or use the app to solicit or advertise competing services.</p>
+    </div>
+
+    <div class="legal-section" id="s32">
+      <h2>32. Ratings & Reviews</h2>
+      <p>Ratings and reviews reflect the opinions of individual users and laundry partners. We do not verify or endorse them. We may remove content that violates these Terms, including spam, hate speech, threats, or personal information, but we are not obligated to monitor or moderate all reviews. Any attempt to manipulate ratings — including incentivising positive reviews, posting false negative reviews about competitors, or retaliating against customers through ratings — is a violation of these Terms and may result in account suspension.</p>
+    </div>
+
+    <div class="legal-section" id="s33">
+      <h2>33. Force Majeure</h2>
+      <p>We shall not be liable for any failure or delay in performance due to events beyond our reasonable control, including but not limited to acts of God, war, terrorism, riots, embargoes, fires, floods, strikes, internet outages, government actions, or changes in law.</p>
+    </div>
+
+    <div class="legal-section" id="s34">
+      <h2>34. Changes to the Services / Terms</h2>
+      <p>We may modify, suspend, or discontinue any part of the Services at any time without notice or liability. We may update these Terms at any time. Continued use of the Services after changes constitutes acceptance of the new Terms. We will notify you of material changes via in-app notice or email where required by law.</p>
+    </div>
+
+    <div class="legal-section" id="s35">
+      <h2>35. Governing Law & Dispute Resolution</h2>
+      <p>These Terms are governed by the laws of the Federal Republic of Nigeria. Unang Tech and yourself irrevocably consent that the courts of Nigeria shall have jurisdiction to resolve any dispute which may arise in connection with these Legal Terms.</p>
+      <p>Any disputes that cannot be resolved through the process described in Section 18 shall be resolved exclusively through binding arbitration under the rules of the Multi-Door Courthouse or a mutually agreed arbitrator, unless otherwise required by law. You waive any right to participate in a class action lawsuit against Laundrify or Unang Tech.</p>
+    </div>
+
+    <div class="legal-section" id="s36">
+      <h2>36. Contact Us</h2>
+      <p>In order to resolve a complaint regarding the Services or to receive further information regarding use of the Services, please contact us at:</p>
+    </div>
+
+    <div class="contact-box">
+      <h3>Unang Tech</h3>
+      <p>24 Lunguda street, G/lada</p>
+      <p>G/lada, Federal capital territory 902301, Nigeria</p>
+      <p>Phone: <a href="tel:+2347040745661">+2347040745661</a></p>
+      <p>Email: <a href="mailto:support@laundrify.com.ng">support@laundrify.com.ng</a></p>
+      <p>Website: <a href="https://laundrify.com.ng" target="_blank">laundrify.com.ng</a></p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <a class="footer-logo" href="index.html"><span>Laundr</span>ify</a>
+    <p>© 2026 Unang Tech. All rights reserved.</p>
+    <div class="footer-legal">
+      <a href="terms-of-service.html">Terms of Service</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="cookie-policy.html">Cookie Policy</a>
+      <a href="partner-agreement.html">Partner Agreement</a>
+      <a href="refund-policy.html">Refund Policy</a>
+      <a href="community-guidelines.html">Community Guidelines</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

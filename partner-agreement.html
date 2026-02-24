@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partner Agreement — Laundrify</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --base: #bbd2f0; --base-light: #ddeaf8;
+    --blue: #2a6cc4; --blue-deep: #1a4a9e; --dark: #0e1e38;
+    --text: #0e1e38; --text-muted: #4a6080;
+    --grad: linear-gradient(160deg, #ffffff 0%, #ddeaf8 30%, #bbd2f0 65%, #8ab8e8 100%);
+    --green: #15803d; --green-bg: rgba(34,197,94,0.08); --green-border: rgba(34,197,94,0.25);
+    --red: #b91c1c; --red-bg: rgba(239,68,68,0.07); --red-border: rgba(239,68,68,0.22);
+    --amber: #92400e; --amber-bg: rgba(251,191,36,0.1); --amber-border: rgba(251,191,36,0.35);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--grad); min-height: 100vh; color: var(--text); }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 52px; height: 68px;
+    background: rgba(255,255,255,0.6); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(187,210,240,0.6);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 600; color: var(--dark); text-decoration: none; }
+  .nav-logo span { color: var(--blue); }
+  .nav-back { color: var(--text-muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+  .nav-back::before { content: '← '; }
+  .nav-back:hover { color: var(--dark); }
+
+  .page-hero { padding: 120px 24px 52px; text-align: center; max-width: 800px; margin: 0 auto; }
+  .page-tag {
+    display: inline-block; background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(42,108,196,0.25); border-radius: 50px;
+    padding: 5px 18px; font-size: 0.75rem; font-weight: 500; color: var(--blue);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 20px;
+  }
+  .page-hero h1 {
+    font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600; color: var(--dark); line-height: 1.2; margin-bottom: 14px;
+  }
+  .page-hero p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; max-width: 580px; margin: 0 auto; }
+  .last-updated {
+    display: inline-block; margin-top: 14px; font-size: 0.8rem; color: var(--text-muted);
+    background: rgba(255,255,255,0.6); border-radius: 50px;
+    padding: 4px 14px; border: 1px solid rgba(187,210,240,0.6);
+  }
+
+  .toc-wrap { max-width: 800px; margin: 0 auto 24px; padding: 0 24px; }
+  .toc-box {
+    background: rgba(255,255,255,0.65); border: 1px solid rgba(187,210,240,0.8);
+    border-radius: 20px; padding: 28px 40px; backdrop-filter: blur(10px);
+  }
+  .toc-box h2 {
+    font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600;
+    color: var(--dark); margin-bottom: 14px; padding-bottom: 10px;
+    border-bottom: 1px solid rgba(187,210,240,0.7);
+  }
+  .toc-list { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 3px 24px; }
+  .toc-list a {
+    color: var(--blue); text-decoration: none; font-size: 0.81rem;
+    padding: 5px 0; display: block; border-bottom: 1px solid rgba(187,210,240,0.3); transition: color 0.2s;
+  }
+  .toc-list a:hover { color: var(--blue-deep); }
+
+  .legal-content { max-width: 800px; margin: 0 auto 80px; padding: 0 24px; }
+  .legal-card {
+    background: rgba(255,255,255,0.7); border: 1px solid rgba(187,210,240,0.8);
+    border-radius: 24px; padding: 52px 56px; backdrop-filter: blur(10px);
+    box-shadow: 0 4px 32px rgba(42,108,196,0.07);
+  }
+
+  .intro-block {
+    background: rgba(42,108,196,0.05); border: 1px solid rgba(42,108,196,0.15);
+    border-radius: 14px; padding: 24px 28px; margin-bottom: 44px;
+  }
+  .intro-block p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 10px; }
+  .intro-block p:last-child { margin-bottom: 0; }
+  .intro-block strong { color: var(--dark); }
+
+  .legal-section { margin-bottom: 42px; scroll-margin-top: 90px; }
+  .legal-section:last-child { margin-bottom: 0; }
+  .legal-section h2 {
+    font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600;
+    color: var(--dark); margin-bottom: 14px; padding-bottom: 10px;
+    border-bottom: 1px solid rgba(187,210,240,0.7);
+  }
+  .legal-section h3 { font-size: 0.95rem; font-weight: 600; color: var(--dark); margin: 20px 0 8px; }
+  .legal-section p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 12px; }
+  .legal-section p:last-child { margin-bottom: 0; }
+  .legal-section ul, .legal-section ol { padding-left: 22px; margin-bottom: 12px; }
+  .legal-section li { font-size: 0.92rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 8px; }
+
+  .notice-box {
+    background: rgba(42,108,196,0.05); border-left: 3px solid var(--blue);
+    border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 14px 0;
+    font-size: 0.88rem; color: var(--text-muted); line-height: 1.75;
+  }
+  .notice-box strong { color: var(--dark); }
+
+  .warn-box {
+    background: var(--amber-bg); border-left: 3px solid #f59e0b;
+    border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 14px 0;
+    font-size: 0.88rem; color: var(--text-muted); line-height: 1.75;
+  }
+  .warn-box strong { color: var(--amber); }
+
+  .danger-box {
+    background: var(--red-bg); border-left: 3px solid #ef4444;
+    border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 14px 0;
+    font-size: 0.88rem; color: var(--text-muted); line-height: 1.75;
+  }
+  .danger-box strong { color: var(--red); }
+
+  /* Strike tier cards */
+  .strike-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 18px 0; }
+  .strike-card { border-radius: 14px; padding: 18px 20px; text-align: center; }
+  .strike-card.s1 { background: var(--amber-bg); border: 1px solid var(--amber-border); }
+  .strike-card.s2 { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.3); }
+  .strike-card.s3 { background: var(--red-bg); border: 1px solid var(--red-border); }
+  .strike-card .strike-num { font-size: 1.6rem; font-weight: 700; margin-bottom: 6px; }
+  .strike-card.s1 .strike-num { color: #d97706; }
+  .strike-card.s2 .strike-num { color: #ea580c; }
+  .strike-card.s3 .strike-num { color: var(--red); }
+  .strike-card h4 { font-size: 0.88rem; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
+  .strike-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+
+  /* Commission table */
+  .commission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 18px 0; }
+  .commission-card { border-radius: 14px; padding: 20px 22px; }
+  .commission-card.standard { background: var(--green-bg); border: 1px solid var(--green-border); }
+  .commission-card.elevated { background: var(--amber-bg); border: 1px solid var(--amber-border); }
+  .commission-card .rate { font-size: 2rem; font-weight: 700; margin-bottom: 4px; }
+  .commission-card.standard .rate { color: var(--green); }
+  .commission-card.elevated .rate { color: #d97706; }
+  .commission-card h4 { font-size: 0.88rem; font-weight: 600; color: var(--dark); margin-bottom: 8px; }
+  .commission-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
+
+  .timeline-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 13px 0; border-bottom: 1px solid rgba(187,210,240,0.45);
+    font-size: 0.9rem;
+  }
+  .timeline-row:last-child { border-bottom: none; }
+  .timeline-label { font-weight: 600; color: var(--dark); min-width: 200px; flex-shrink: 0; }
+  .timeline-val { color: var(--text-muted); line-height: 1.7; }
+
+  .contact-box {
+    background: linear-gradient(135deg, rgba(42,108,196,0.08), rgba(187,210,240,0.2));
+    border: 1px solid rgba(42,108,196,0.2); border-radius: 16px; padding: 28px 32px; margin-top: 44px;
+  }
+  .contact-box h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--dark); margin-bottom: 10px; }
+  .contact-box p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 5px; line-height: 1.7; }
+  .contact-box a { color: var(--blue); text-decoration: none; font-weight: 500; }
+
+  footer { background: rgba(14,30,56,0.95); padding: 36px 60px 28px; }
+  .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: #fff; text-decoration: none; }
+  .footer-logo span { color: var(--base); }
+  .footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+  .footer-legal { display: flex; gap: 20px; flex-wrap: wrap; }
+  .footer-legal a { font-size: 0.8rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+  .footer-legal a:hover { color: rgba(255,255,255,0.8); }
+
+  @media (max-width: 680px) {
+    nav { padding: 0 20px; }
+    .legal-card { padding: 32px 22px; }
+    .toc-box { padding: 22px 20px; }
+    .toc-list { grid-template-columns: 1fr; }
+    .strike-grid { grid-template-columns: 1fr; }
+    .commission-grid { grid-template-columns: 1fr; }
+    .timeline-label { min-width: 140px; }
+    footer { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html"><span>Laundr</span>ify</a>
+  <a class="nav-back" href="index.html">Back to Home</a>
+</nav>
+
+<section class="page-hero">
+  <span class="page-tag">Legal</span>
+  <h1>Partner Agreement</h1>
+  <p>This agreement governs the relationship between Laundrify and all dry cleaning businesses registered on the Laundrify DryCleaners platform. Please read it carefully before activating your account.</p>
+  <span class="last-updated">Last updated: February 15, 2026</span>
+</section>
+
+<div class="toc-wrap">
+  <div class="toc-box">
+    <h2>Table of Contents</h2>
+    <ul class="toc-list">
+      <li><a href="#s1">1. About This Agreement</a></li>
+      <li><a href="#s2">2. Registration & Verification</a></li>
+      <li><a href="#s3">3. Partner Status & Independence</a></li>
+      <li><a href="#s4">4. What Laundrify Provides</a></li>
+      <li><a href="#s5">5. Partner Obligations</a></li>
+      <li><a href="#s6">6. Commission & Fees</a></li>
+      <li><a href="#s7">7. Payouts</a></li>
+      <li><a href="#s8">8. Quality Standards & Complaints</a></li>
+      <li><a href="#s9">9. Strike System & Enforcement</a></li>
+      <li><a href="#s10">10. Prohibited Conduct</a></li>
+      <li><a href="#s11">11. Branding & Intellectual Property</a></li>
+      <li><a href="#s12">12. Non-Solicitation</a></li>
+      <li><a href="#s13">13. Other Platforms</a></li>
+      <li><a href="#s14">14. Liability & Indemnification</a></li>
+      <li><a href="#s15">15. Termination</a></li>
+      <li><a href="#s16">16. Effect of Termination</a></li>
+      <li><a href="#s17">17. Amendments to This Agreement</a></li>
+      <li><a href="#s18">18. Governing Law</a></li>
+      <li><a href="#s19">19. General Provisions</a></li>
+      <li><a href="#s20">20. Contact Us</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="legal-content">
+  <div class="legal-card">
+
+    <div class="intro-block">
+      <p>This Partner Agreement ("Agreement") is entered into between <strong>Unang Tech</strong> ("Laundrify," "we," "us," or "our"), the operator of the Laundrify platform, and the dry cleaning business or individual ("Partner," "you," or "your") who registers on the Laundrify DryCleaners application.</p>
+      <p>By completing registration on the Laundrify DryCleaners app and activating your Partner account, you confirm that you have read, understood, and agreed to be bound by this Agreement in full. This Agreement forms a legally binding contract between you and Laundrify.</p>
+      <p>This Agreement should be read alongside our <a href="terms-of-service.html" style="color:var(--blue); font-weight:500;">Terms of Service</a>, <a href="privacy-policy.html" style="color:var(--blue); font-weight:500;">Privacy Policy</a>, and <a href="refund-policy.html" style="color:var(--blue); font-weight:500;">Refund Policy</a>, all of which apply to your use of the platform. In the event of a conflict between this Agreement and the Terms of Service on matters specific to Partners, this Agreement shall prevail.</p>
+    </div>
+
+    <!-- SECTION 1 -->
+    <div class="legal-section" id="s1">
+      <h2>1. About This Agreement</h2>
+      <p>Laundrify is a technology marketplace platform that connects customers who need laundry and dry cleaning services with independent dry cleaning businesses. This Agreement sets out the terms under which you are permitted to list your services, receive orders, and earn payouts through the Laundrify platform.</p>
+      <p>This Agreement applies exclusively to Partners using the <strong>Laundrify DryCleaners</strong> application. It does not apply to customers using the Laundrify customer app, who are governed separately by the Terms of Service.</p>
+      <p>Laundrify operates currently within Nigeria. This Agreement is governed by the laws of the Federal Republic of Nigeria.</p>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="legal-section" id="s2">
+      <h2>2. Registration & Verification</h2>
+      <h3>How to become a Partner</h3>
+      <p>Any individual or dry cleaning business operating in Nigeria may apply to become a Laundrify Partner by downloading the Laundrify DryCleaners app and completing the registration process. Registration is free of charge.</p>
+      <p>To complete registration, you must provide:</p>
+      <ul>
+        <li>Your full legal name (individual) or business trading name</li>
+        <li>A valid Nigerian phone number and email address</li>
+        <li>Your National Identification Number (NIN)</li>
+        <li>Your business address and operating location</li>
+        <li>Your bank account details for payout processing</li>
+        <li>Any other information requested during the registration process</li>
+      </ul>
+
+      <h3>NIN Verification</h3>
+      <p>All Partner applicants are required to submit a valid NIN as part of the registration process. Your NIN and identity will be verified by Laundrify before your account is activated. Your account will remain in a pending state until verification is successfully completed.</p>
+      <div class="danger-box">
+        <strong>Zero tolerance for identity fraud:</strong> Submitting a false, borrowed, or fraudulent NIN — or a NIN that does not belong to you — will result in immediate and permanent rejection or termination of your Partner account. We reserve the right to report such cases to the relevant Nigerian authorities, including the National Identity Management Commission (NIMC).
+      </div>
+
+      <h3>Activation</h3>
+      <p>Once your identity has been verified and your application approved, Laundrify will activate your Partner account. You will receive a confirmation notification through the Laundrify DryCleaners app. From this point, your business profile will be visible to customers in your area and you may begin receiving orders.</p>
+      <p>Laundrify reserves the right to reject any application at its sole discretion, without being required to provide a reason.</p>
+
+      <h3>Keeping your information accurate</h3>
+      <p>You are responsible for ensuring that all information on your Partner profile — including your business name, location, services offered, pricing, and bank account details — is accurate and kept up to date at all times. Providing false or misleading information is a breach of this Agreement and may result in suspension or termination.</p>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="legal-section" id="s3">
+      <h2>3. Partner Status & Independence</h2>
+      <p>You are an independent contractor, not an employee, agent, representative, or partner of Laundrify or Unang Tech. Nothing in this Agreement shall be construed to create a relationship of employment, agency, joint venture, or partnership between you and Laundrify.</p>
+      <p>As an independent contractor, you:</p>
+      <ul>
+        <li>Retain full control over how you deliver your laundry and dry cleaning services, subject to the quality standards in this Agreement</li>
+        <li>Are solely responsible for your own business operations, overheads, staff, equipment, and premises</li>
+        <li>Are solely responsible for paying any taxes, levies, or duties arising from your earnings on the platform, including income tax and VAT where applicable under Nigerian law</li>
+        <li>Are not entitled to any employment benefits, social security contributions, or protections from Laundrify</li>
+        <li>Are solely responsible for complying with all applicable Nigerian laws and regulations governing your business operations</li>
+      </ul>
+      <p>Laundrify provides the technology platform and infrastructure that enables you to connect with customers. We do not direct or supervise the performance of your services beyond the platform standards set out in this Agreement.</p>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="legal-section" id="s4">
+      <h2>4. What Laundrify Provides</h2>
+      <p>As a registered Partner, Laundrify provides you with:</p>
+      <ul>
+        <li><strong>The Laundrify DryCleaners app</strong> — a dedicated mobile application for managing your orders, updating your service listings and pricing, communicating with customers, and tracking your earnings and payout history</li>
+        <li><strong>Partner dashboard</strong> — an in-app dashboard giving you visibility over your active orders, completed jobs, earnings, ratings, and account status</li>
+        <li><strong>Customer access</strong> — visibility to customers in your service area who are actively looking for dry cleaning and laundry services through the Laundrify platform</li>
+        <li><strong>Order management</strong> — tools to accept, manage, and update the status of orders in real time</li>
+        <li><strong>Payment processing</strong> — Laundrify handles all customer payments through Paystack. You do not need to manage payment collection yourself</li>
+        <li><strong>Payout processing</strong> — your earnings (minus commission) are calculated and paid out to your registered bank account on a weekly schedule</li>
+        <li><strong>Support access</strong> — access to Laundrify's support team for platform-related issues</li>
+      </ul>
+      <p>Laundrify does not guarantee any minimum number of orders, minimum earnings, or a minimum level of customer activity. Your earnings depend on customer demand in your area, your service quality, your ratings, and your availability on the platform.</p>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="legal-section" id="s5">
+      <h2>5. Partner Obligations</h2>
+      <p>By accepting this Agreement, you commit to the following obligations for the duration of your partnership with Laundrify:</p>
+
+      <h3>Service delivery</h3>
+      <ul>
+        <li>Accept and process orders in a timely manner. Once you accept an order, you are committed to fulfilling it.</li>
+        <li>Deliver services to the standard described in your profile and to a generally acceptable professional quality.</li>
+        <li>Communicate proactively with customers about the status of their order, including any delays, issues, or concerns identified during processing.</li>
+        <li>Inspect all items received before processing. You must notify customers of any pre-existing damage, stains, or concerns before proceeding.</li>
+        <li>Follow any care label instructions or special handling requests disclosed by the customer.</li>
+        <li>Return items securely packaged and clearly labelled to prevent mix-ups.</li>
+      </ul>
+
+      <h3>Availability</h3>
+      <ul>
+        <li>Keep your availability settings on the platform accurate and up to date.</li>
+        <li>Be available for scheduled pickups and drop-offs as confirmed through the app. Repeated unavailability without notice is a violation of this Agreement.</li>
+        <li>If you are unable to fulfil an accepted order, notify Laundrify support immediately so alternative arrangements can be made for the customer.</li>
+      </ul>
+
+      <h3>Prohibited items</h3>
+      <p>You must refuse to accept and process the following categories of items. If such items are presented to you, you must reject them and notify the customer and Laundrify support:</p>
+      <ul>
+        <li>Heavily contaminated items including those with bodily fluids, human or animal waste, blood, or biohazards</li>
+        <li>Pest-infested items (bedbugs, lice, rodents, or similar)</li>
+        <li>Hazardous materials including flammables, chemicals, batteries, explosives, sharps or needles, and oils or paints</li>
+        <li>Illegal or contraband items of any kind</li>
+      </ul>
+
+      <h3>Compliance</h3>
+      <ul>
+        <li>Comply with all applicable Nigerian federal and state laws and regulations governing your laundry or dry cleaning business operations.</li>
+        <li>Maintain hygienic and safe facilities and practices at all times.</li>
+        <li>Cooperate fully with any investigation or audit conducted by Laundrify relating to a customer complaint, refund request, or suspected violation.</li>
+      </ul>
+    </div>
+
+    <!-- SECTION 6 -->
+    <div class="legal-section" id="s6">
+      <h2>6. Commission & Fees</h2>
+      <p>In exchange for access to the Laundrify platform, customer base, order management tools, and payment processing, Laundrify charges a commission on each completed order. Commission is deducted automatically from your earnings before your payout is processed.</p>
+
+      <div class="commission-grid">
+        <div class="commission-card standard">
+          <div class="rate">15%</div>
+          <h4>Standard Commission Rate</h4>
+          <p>Applied to all Partners in good standing. This is the default rate that applies to your account from activation.</p>
+        </div>
+        <div class="commission-card elevated">
+          <div class="rate">Up to 25%</div>
+          <h4>Elevated Commission Rate</h4>
+          <p>May be applied where a Partner falls below the platform's quality threshold — for example, a sustained low rating or repeated refund deductions. See below.</p>
+        </div>
+      </div>
+
+      <h3>Elevated commission conditions</h3>
+      <p>Laundrify reserves the right to increase your commission rate above the standard 15%, up to a maximum of 25%, in the following circumstances:</p>
+      <ul>
+        <li>Your average customer rating falls below a threshold communicated to you in the app</li>
+        <li>You have accumulated multiple validated refund deductions within a rolling 90-day period</li>
+        <li>You have received a formal written warning under the strike system (see Section 9) and the relevant conduct has not been remedied</li>
+      </ul>
+      <p>Where an elevated commission rate is applied, Laundrify will notify you in writing (via the app or email) stating the reason and the new rate. The elevated rate will remain in place until the underlying issue is resolved to Laundrify's satisfaction, at which point your rate will revert to the standard 15%.</p>
+
+      <h3>Commission changes</h3>
+      <p>Laundrify may adjust the standard commission rate with a minimum of <strong>14 days' written notice</strong> to all Partners, communicated via the Laundrify DryCleaners app or by email. Continued use of the platform after the notice period constitutes acceptance of the new rate.</p>
+
+      <div class="notice-box">
+        <strong>No other fees:</strong> There are currently no registration fees, monthly subscription fees, or listing fees to be a Laundrify Partner. Commission on completed orders is the only charge. This may change in the future with appropriate notice as described above.
+      </div>
+    </div>
+
+    <!-- SECTION 7 -->
+    <div class="legal-section" id="s7">
+      <h2>7. Payouts</h2>
+      <p>Your earnings for completed orders — calculated as the order value minus Laundrify's commission and any applicable deductions — are paid out to your registered bank account on a <strong>weekly schedule</strong>.</p>
+
+      <div class="timeline-row">
+        <span class="timeline-label">Payout frequency</span>
+        <span class="timeline-val">Weekly, for all orders completed and verified in the preceding week</span>
+      </div>
+      <div class="timeline-row">
+        <span class="timeline-label">Payout method</span>
+        <span class="timeline-val">Direct bank transfer to your registered Nigerian bank account</span>
+      </div>
+      <div class="timeline-row">
+        <span class="timeline-label">Deductions applied before payout</span>
+        <span class="timeline-val">Laundrify commission, any approved refund deductions, and any other outstanding amounts owed to Laundrify</span>
+      </div>
+      <div class="timeline-row">
+        <span class="timeline-label">Payout notification</span>
+        <span class="timeline-val">You will be notified via the Laundrify DryCleaners app when a payout has been initiated, along with a breakdown of the amount and any deductions</span>
+      </div>
+      <div class="timeline-row">
+        <span class="timeline-label">Bank processing time</span>
+        <span class="timeline-val">Typically 1–3 business days after initiation, depending on your bank</span>
+      </div>
+
+      <h3>Withheld payouts</h3>
+      <p>Laundrify reserves the right to withhold all or part of a scheduled payout in the following circumstances:</p>
+      <ul>
+        <li>There is an open customer dispute or refund investigation relating to one or more of your completed orders</li>
+        <li>There is a suspected fraud or platform abuse investigation involving your account</li>
+        <li>You are in breach of this Agreement and the breach has not been remedied</li>
+        <li>Your account has been suspended pending an investigation</li>
+      </ul>
+      <p>Withheld payouts will be released once the relevant matter is resolved, minus any deductions determined by Laundrify's investigation. You will be notified of any withheld payout and the reason for the withholding.</p>
+
+      <h3>Refund deductions</h3>
+      <p>Where a customer refund is approved by Laundrify and the fault is determined to lie with you as the Partner, the refund amount will be deducted from your next scheduled payout. If the deduction exceeds your pending payout balance, the outstanding amount will be carried forward and deducted from subsequent payouts until fully recovered.</p>
+
+      <h3>Taxes on earnings</h3>
+      <p>You are solely responsible for all taxes applicable to your earnings from the Laundrify platform. Laundrify will provide you with a record of your earnings history through the app dashboard. We may be required by Nigerian law to deduct and remit withholding tax on certain payments — where this applies, you will be notified and provided with appropriate documentation.</p>
+    </div>
+
+    <!-- SECTION 8 -->
+    <div class="legal-section" id="s8">
+      <h2>8. Quality Standards & Complaints</h2>
+      <p>Laundrify maintains platform quality standards to ensure a reliable experience for customers. As a Partner, you are expected to consistently meet these standards.</p>
+      <p>Customer complaints about your service are taken seriously and handled through the process described in our <a href="refund-policy.html" style="color:var(--blue); font-weight:500;">Refund Policy</a>. Where a complaint is raised:</p>
+      <ul>
+        <li>You will be notified of the complaint by Laundrify and given a fair opportunity to provide your account of events and any supporting evidence.</li>
+        <li>You are required to respond to complaint notifications within <strong>5 business days</strong>. Failure to respond will be taken into account when determining the outcome and may result in the refund being approved by default.</li>
+        <li>You cannot cancel, withdraw from, or refuse to participate in a complaint investigation once it has been initiated.</li>
+        <li>Laundrify's decision on the outcome of a complaint is final within the scope of the platform.</li>
+      </ul>
+      <p>Repeated validated complaints — particularly those resulting in approved refund deductions — may trigger a review of your account standing, an elevated commission rate, or disciplinary action under the strike system in Section 9.</p>
+    </div>
+
+    <!-- SECTION 9 -->
+    <div class="legal-section" id="s9">
+      <h2>9. Strike System & Enforcement</h2>
+      <p>Laundrify operates a tiered enforcement system for Partners who breach this Agreement or fail to meet platform standards. The severity of the action taken depends on the nature and frequency of the violation.</p>
+
+      <div class="strike-grid">
+        <div class="strike-card s1">
+          <div class="strike-num">1st</div>
+          <h4>Written Warning</h4>
+          <p>Formal written notice issued via the app or email. No suspension. You are required to acknowledge and address the issue.</p>
+        </div>
+        <div class="strike-card s2">
+          <div class="strike-num">2nd</div>
+          <h4>Temporary Suspension</h4>
+          <p>Your account is suspended for 7 days. You cannot receive new orders during this period. Existing active orders must be completed.</p>
+        </div>
+        <div class="strike-card s3">
+          <div class="strike-num">3rd</div>
+          <h4>Permanent Ban</h4>
+          <p>Your Partner account is permanently terminated. You may not re-register on the platform under any identity.</p>
+        </div>
+      </div>
+
+      <h3>Immediate termination — no strikes required</h3>
+      <p>The following violations are so serious that they will result in <strong>immediate permanent termination</strong> of your Partner account, bypassing the strike system entirely:</p>
+      <ul>
+        <li>Submitting a false, fraudulent, or borrowed NIN during registration</li>
+        <li>Soliciting or accepting payments from customers outside the Laundrify platform</li>
+        <li>Harassing, threatening, or abusing a customer, Laundrify staff, or any other person connected to the platform</li>
+        <li>Accepting or processing prohibited or hazardous items as defined in Section 5</li>
+        <li>Using the platform to facilitate fraud, money laundering, or any illegal activity</li>
+        <li>Creating multiple Partner accounts to manipulate ratings, orders, or payouts</li>
+        <li>Tampering with platform systems, bags, tags, or tracking mechanisms</li>
+        <li>Any act that causes or risks causing serious harm to a customer or third party</li>
+      </ul>
+
+      <div class="warn-box">
+        <strong>Re-registration after a ban:</strong> Partners who have been permanently banned — whether through the strike system or immediate termination — are prohibited from re-registering on the Laundrify platform under any name, identity, NIN, or business entity. Attempts to circumvent a ban will be reported to the relevant Nigerian authorities.
+      </div>
+
+      <h3>Appeals</h3>
+      <p>If you believe a strike, suspension, or termination has been applied unfairly, you may submit a written appeal to <a href="mailto:help@laundrify.com.ng" style="color:var(--blue);">help@laundrify.com.ng</a> within <strong>14 days</strong> of receiving the enforcement notice. Appeals will be reviewed within 14 business days. Laundrify's decision on appeal is final.</p>
+    </div>
+
+    <!-- SECTION 10 -->
+    <div class="legal-section" id="s10">
+      <h2>10. Prohibited Conduct</h2>
+      <p>In addition to the obligations in Section 5 and the immediate termination triggers in Section 9, the following conduct is strictly prohibited and will result in disciplinary action under the strike system or immediate termination depending on severity:</p>
+      <ul>
+        <li>Impersonating another laundry business or falsifying business credentials or certifications</li>
+        <li>Posting false, misleading, or retaliatory reviews or ratings about customers or the Laundrify platform</li>
+        <li>Manipulating your pricing, surcharges, or add-ons in ways not reflected in your published platform profile</li>
+        <li>Providing false information about order status, item conditions, or reasons for delays or rejections</li>
+        <li>Failing to inspect items before processing and then claiming ignorance of pre-existing damage</li>
+        <li>Substandard service delivery that consistently falls below reasonable professional standards and generates recurring customer complaints</li>
+        <li>Spamming, soliciting unrelated business, or advertising competing services to customers through the in-app chat or other platform features</li>
+        <li>Discriminating against customers based on religion, ethnicity, gender, or any other protected characteristic</li>
+        <li>Engaging in unsafe practices during service interactions</li>
+        <li>Any conduct described as prohibited in the Laundrify Terms of Service</li>
+      </ul>
+    </div>
+
+    <!-- SECTION 11 -->
+    <div class="legal-section" id="s11">
+      <h2>11. Branding & Intellectual Property</h2>
+      <h3>Laundrify's intellectual property</h3>
+      <p>The Laundrify name, logo, brand assets, app interface, and all related intellectual property are owned exclusively by Unang Tech. Nothing in this Agreement grants you any ownership rights over Laundrify's intellectual property.</p>
+
+      <h3>Permitted use of the Laundrify brand</h3>
+      <p>As a verified Laundrify Partner, you are permitted to:</p>
+      <ul>
+        <li>Display the designation <strong>"Official Laundrify Partner"</strong> on your business premises, social media profiles, receipts, or marketing materials</li>
+        <li>Use Laundrify-provided Partner badge graphics or assets (where made available by Laundrify) in the formats and sizes we specify</li>
+        <li>State that your business is available on the Laundrify platform</li>
+      </ul>
+
+      <h3>Prohibited brand use</h3>
+      <p>You may not:</p>
+      <ul>
+        <li>Represent yourself as being employed by, owned by, or operating as part of Laundrify or Unang Tech</li>
+        <li>Use the Laundrify name or logo in a way that implies endorsement of your individual business beyond the standard Partner designation</li>
+        <li>Modify, alter, or create derivative versions of the Laundrify logo or brand assets</li>
+        <li>Use the Laundrify brand in any context that is misleading, defamatory, or in connection with prohibited activities</li>
+        <li>Continue to use the Laundrify brand in any form after your Partner account has been deactivated or terminated</li>
+      </ul>
+      <p>Unauthorised use of the Laundrify brand constitutes a violation of our intellectual property rights and may result in legal action in addition to account termination.</p>
+    </div>
+
+    <!-- SECTION 12 -->
+    <div class="legal-section" id="s12">
+      <h2>12. Non-Solicitation</h2>
+      <p>During your partnership with Laundrify and for a period of <strong>6 months after termination</strong> of your Partner account (for any reason), you agree not to:</p>
+      <ul>
+        <li>Directly solicit, contact, or approach any customer you first acquired through the Laundrify platform for the purpose of conducting laundry or dry cleaning transactions outside of the platform</li>
+        <li>Exchange personal contact details with Laundrify customers for the purpose of circumventing platform orders or commissions</li>
+        <li>Offer or agree to provide services to a Laundrify customer off-platform after initial contact was made through Laundrify</li>
+      </ul>
+      <p>This obligation applies regardless of whether the customer initiates the contact. If a customer approaches you directly and proposes an off-platform arrangement, you are obligated to decline and direct them to book through the Laundrify app.</p>
+      <div class="notice-box">
+        <strong>Why this matters:</strong> Laundrify invests in marketing, technology, and customer acquisition that benefits all Partners on the platform. Off-platform solicitation undermines the marketplace and the livelihood of other Partners. Violations confirmed through investigation will result in immediate termination and recovery of any commissions avoided.
+      </div>
+    </div>
+
+    <!-- SECTION 13 -->
+    <div class="legal-section" id="s13">
+      <h2>13. Other Platforms</h2>
+      <p>You are free to list your dry cleaning or laundry business on other platforms, marketplaces, or apps that may exist alongside Laundrify. We do not require exclusivity.</p>
+      <p>However, you may not use your Laundrify Partner status, the Laundrify brand, or data obtained through the Laundrify platform (including customer information) to benefit your listings or activities on other platforms. The non-solicitation obligations in Section 12 apply regardless of which other platforms you use.</p>
+    </div>
+
+    <!-- SECTION 14 -->
+    <div class="legal-section" id="s14">
+      <h2>14. Liability & Indemnification</h2>
+      <h3>Your liability to customers</h3>
+      <p>As an independent service provider, you are solely liable for the quality, safety, and outcome of the services you deliver to customers. This includes but is not limited to liability for lost items, damage caused during the cleaning process, and any personal injury or property damage arising from your operations.</p>
+      <p>Laundrify's maximum liability to any party in connection with a Partner's services is limited to the refund mechanisms described in our <a href="refund-policy.html" style="color:var(--blue); font-weight:500;">Refund Policy</a> — capped at the service fee paid for the affected order. Laundrify does not indemnify Partners against claims made by customers.</p>
+
+      <h3>Your indemnification of Laundrify</h3>
+      <p>You agree to defend, indemnify, and hold harmless Laundrify, Unang Tech, and their respective officers, employees, and agents from and against any claims, losses, damages, liabilities, costs, and expenses (including legal fees) arising out of or relating to:</p>
+      <ul>
+        <li>Your delivery of services to customers through the platform</li>
+        <li>Your breach of this Agreement or the Terms of Service</li>
+        <li>Your violation of any applicable law or regulation</li>
+        <li>Any false or misleading information provided by you during registration or otherwise</li>
+        <li>Any third-party claim arising from your business operations</li>
+      </ul>
+
+      <h3>Laundrify's limitation of liability</h3>
+      <p>Laundrify provides the platform on an "as is" basis. We do not guarantee uninterrupted availability of the platform, a minimum level of orders or earnings, or the accuracy of customer information provided to you. To the maximum extent permitted by Nigerian law, Laundrify's total liability to you for any claim arising from this Agreement is limited to the commission fees paid by you in the three months preceding the claim.</p>
+    </div>
+
+    <!-- SECTION 15 -->
+    <div class="legal-section" id="s15">
+      <h2>15. Termination</h2>
+      <h3>Termination by you</h3>
+      <p>You may terminate your participation as a Laundrify Partner at any time by notifying us in writing at <a href="mailto:help@laundrify.com.ng" style="color:var(--blue);">help@laundrify.com.ng</a> or through the account settings in the Laundrify DryCleaners app, subject to a minimum notice period of <strong>7 days</strong>.</p>
+      <p>During this notice period, you are required to fulfil all active and accepted orders. You may not accept new orders after submitting your notice of termination if you are unable to complete them within the notice period.</p>
+
+      <h3>Termination by Laundrify</h3>
+      <p>Laundrify may terminate this Agreement and deactivate your Partner account:</p>
+      <ul>
+        <li><strong>Immediately and without notice</strong> — for serious violations as described in Section 9 or any conduct that poses a risk of harm to customers, third parties, or the platform</li>
+        <li><strong>With written notice</strong> — for repeated or unresolved breaches of this Agreement following the strike process in Section 9</li>
+        <li><strong>At our discretion</strong> — if we determine that your continued participation is not in the best interests of the platform, customers, or other Partners, with reasonable notice where practicable</li>
+      </ul>
+    </div>
+
+    <!-- SECTION 16 -->
+    <div class="legal-section" id="s16">
+      <h2>16. Effect of Termination</h2>
+      <p>Upon termination of this Agreement, regardless of reason:</p>
+      <ul>
+        <li>Your Partner account will be deactivated and your profile removed from the customer-facing platform</li>
+        <li>All active orders that have been paid for by customers at the time of termination must be completed and returned. Laundrify will work with you to ensure these are fulfilled.</li>
+        <li>Your final payout — covering all completed orders up to the termination date, minus any outstanding deductions, refund amounts, or amounts owed to Laundrify — will be processed on the next scheduled weekly payout date following resolution of any open matters</li>
+        <li>You must immediately cease all use of the Laundrify brand, name, and logo as described in Section 11</li>
+        <li>The non-solicitation obligations in Section 12 continue to apply for 6 months following termination</li>
+        <li>Your personal and financial data will be handled in accordance with our <a href="privacy-policy.html" style="color:var(--blue); font-weight:500;">Privacy Policy</a></li>
+      </ul>
+      <div class="notice-box">
+        <strong>Final payout note:</strong> Where there are open customer complaints, refund investigations, or suspected fraud matters at the time of termination, the relevant portion of your final payout may be withheld until those matters are resolved. You will be notified of any withheld amounts and the expected resolution timeline.
+      </div>
+    </div>
+
+    <!-- SECTION 17 -->
+    <div class="legal-section" id="s17">
+      <h2>17. Amendments to This Agreement</h2>
+      <p>Laundrify may amend this Partner Agreement from time to time. We will provide Partners with at least <strong>14 days' written notice</strong> of any material changes, communicated via the Laundrify DryCleaners app notification or by email to your registered address.</p>
+      <p>If you do not agree with the amended terms, you may terminate your Partner account before the effective date of the changes by following the process in Section 15. Continued use of the platform after the effective date of any changes constitutes your acceptance of the amended Agreement.</p>
+    </div>
+
+    <!-- SECTION 18 -->
+    <div class="legal-section" id="s18">
+      <h2>18. Governing Law</h2>
+      <p>This Agreement is governed by and construed in accordance with the laws of the Federal Republic of Nigeria. Any dispute arising out of or in connection with this Agreement that cannot be resolved amicably shall be submitted to binding arbitration under the rules of the Multi-Door Courthouse or a mutually agreed arbitrator in Nigeria. Both parties waive any right to participate in class action proceedings.</p>
+    </div>
+
+    <!-- SECTION 19 -->
+    <div class="legal-section" id="s19">
+      <h2>19. General Provisions</h2>
+      <ul>
+        <li><strong>Entire agreement:</strong> This Agreement, together with the Terms of Service, Privacy Policy, Refund Policy, and Cookie Policy, constitutes the entire agreement between you and Laundrify with respect to your participation as a Partner.</li>
+        <li><strong>Severability:</strong> If any provision of this Agreement is found to be unlawful, void, or unenforceable, that provision shall be severed and the remaining provisions shall continue in full force and effect.</li>
+        <li><strong>No waiver:</strong> Laundrify's failure to enforce any provision of this Agreement at any time shall not be construed as a waiver of that provision or of our right to enforce it in the future.</li>
+        <li><strong>Assignment:</strong> You may not assign or transfer your rights or obligations under this Agreement to any third party without Laundrify's prior written consent. Laundrify may assign its rights and obligations to a successor entity in connection with a merger, acquisition, or restructuring.</li>
+        <li><strong>Notices:</strong> All formal notices under this Agreement shall be sent to Laundrify at support@laundrify.com.ng and to you at the email address registered on your Partner account.</li>
+        <li><strong>Language:</strong> This Agreement is written in English. In the event of any conflict between an English version and a translation, the English version shall prevail.</li>
+      </ul>
+    </div>
+
+    <!-- SECTION 20 -->
+    <div class="legal-section" id="s20">
+      <h2>20. Contact Us</h2>
+      <p>For any questions about this Partner Agreement, disputes, appeals, or to submit a termination notice, please contact us:</p>
+    </div>
+
+    <div class="contact-box">
+      <h3>Unang Tech — Partner Relations</h3>
+      <p>Email: <a href="mailto:support@laundrify.com.ng">support@laundrify.com.ng</a></p>
+      <p>Phone: <a href="tel:+2347040745661">+2347040745661</a></p>
+      <p>Address: 24 Lunguda street, G/lada, G/lada, Federal capital territory 902301, Nigeria</p>
+      <p>Website: <a href="https://laundrify.com.ng" target="_blank">laundrify.com.ng</a></p>
+      <p style="margin-top:12px; font-size:0.85rem;">For appeals against enforcement actions, include your account details and the reference number from your enforcement notice. Appeals must be submitted within <strong>14 days</strong> of the enforcement notice.</p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <a class="footer-logo" href="index.html"><span>Laundr</span>ify</a>
+    <p>© 2026 Unang Tech. All rights reserved.</p>
+    <div class="footer-legal">
+      <a href="terms-of-service.html">Terms of Service</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="cookie-policy.html">Cookie Policy</a>
+      <a href="partner-agreement.html">Partner Agreement</a>
+      <a href="refund-policy.html">Refund Policy</a>
+      <a href="community-guidelines.html">Community Guidelines</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

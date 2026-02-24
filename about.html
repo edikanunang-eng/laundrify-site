@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — Laundrify</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --base: #bbd2f0; --base-light: #ddeaf8;
+    --blue: #2a6cc4; --blue-deep: #1a4a9e; --dark: #0e1e38;
+    --text: #0e1e38; --text-muted: #4a6080;
+    --grad: linear-gradient(160deg, #ffffff 0%, #ddeaf8 30%, #bbd2f0 65%, #8ab8e8 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--grad); min-height: 100vh; color: var(--text); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 52px; height: 68px;
+    background: rgba(255,255,255,0.6); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(187,210,240,0.6);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 600; color: var(--dark); text-decoration: none; }
+  .nav-logo span { color: var(--blue); }
+  .nav-back { color: var(--text-muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+  .nav-back::before { content: '← '; }
+  .nav-back:hover { color: var(--dark); }
+
+  /* HERO */
+  .hero {
+    padding: 148px 24px 80px; text-align: center;
+    max-width: 720px; margin: 0 auto;
+  }
+  .page-tag {
+    display: inline-block; background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(42,108,196,0.25); border-radius: 50px;
+    padding: 5px 18px; font-size: 0.75rem; font-weight: 500; color: var(--blue);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    font-weight: 600; color: var(--dark); line-height: 1.15; margin-bottom: 22px;
+  }
+  .hero h1 em { font-style: italic; color: var(--blue); }
+  .hero p {
+    font-size: 1.05rem; color: var(--text-muted); line-height: 1.8;
+    max-width: 560px; margin: 0 auto 36px;
+  }
+  .hero-meta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.65); border: 1px solid rgba(187,210,240,0.7);
+    border-radius: 50px; padding: 7px 20px;
+    font-size: 0.82rem; color: var(--text-muted); font-weight: 500;
+  }
+  .hero-meta span { color: var(--blue); font-weight: 600; }
+
+  /* CONTENT */
+  .content { max-width: 800px; margin: 0 auto 100px; padding: 0 24px; }
+
+  /* Story section */
+  .story {
+    background: rgba(255,255,255,0.72); border: 1px solid rgba(187,210,240,0.8);
+    border-radius: 28px; padding: 56px 60px;
+    box-shadow: 0 4px 40px rgba(42,108,196,0.07);
+    margin-bottom: 20px; backdrop-filter: blur(10px);
+  }
+  .story-label {
+    font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--blue); margin-bottom: 16px; display: block;
+  }
+  .story h2 {
+    font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600; color: var(--dark); line-height: 1.3; margin-bottom: 24px;
+  }
+  .story p {
+    font-size: 0.97rem; color: var(--text-muted); line-height: 1.9;
+    margin-bottom: 18px;
+  }
+  .story p:last-child { margin-bottom: 0; }
+  .story p strong { color: var(--dark); }
+
+  /* Pull quote */
+  .pull-quote {
+    border-left: 3px solid var(--blue); padding: 18px 24px; margin: 32px 0;
+    background: rgba(42,108,196,0.04); border-radius: 0 12px 12px 0;
+  }
+  .pull-quote p {
+    font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic;
+    color: var(--dark); line-height: 1.65; margin: 0;
+  }
+
+  /* Values grid */
+  .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+  .value-card {
+    background: rgba(255,255,255,0.72); border: 1px solid rgba(187,210,240,0.8);
+    border-radius: 20px; padding: 28px 26px;
+    box-shadow: 0 4px 20px rgba(42,108,196,0.05); backdrop-filter: blur(10px);
+    transition: transform 0.2s;
+  }
+  .value-card:hover { transform: translateY(-3px); }
+  .value-icon { font-size: 1.8rem; margin-bottom: 14px; display: block; }
+  .value-card h3 {
+    font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600;
+    color: var(--dark); margin-bottom: 8px;
+  }
+  .value-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+
+  /* Stats row */
+  .stats {
+    background: rgba(14,30,56,0.92); border-radius: 24px;
+    padding: 44px 52px; margin-bottom: 20px;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; text-align: center;
+  }
+  .stat-item {}
+  .stat-num {
+    font-family: 'Playfair Display', serif; font-size: 2.4rem;
+    font-weight: 600; color: var(--base); line-height: 1; margin-bottom: 8px;
+  }
+  .stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+  /* Mission card */
+  .mission {
+    background: linear-gradient(135deg, rgba(42,108,196,0.08), rgba(187,210,240,0.25));
+    border: 1px solid rgba(42,108,196,0.18); border-radius: 28px;
+    padding: 52px 60px; margin-bottom: 20px; text-align: center;
+    backdrop-filter: blur(10px);
+  }
+  .mission-label {
+    font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--blue); margin-bottom: 16px; display: block;
+  }
+  .mission h2 {
+    font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-weight: 600; color: var(--dark); line-height: 1.3;
+    max-width: 560px; margin: 0 auto 20px;
+  }
+  .mission p {
+    font-size: 0.95rem; color: var(--text-muted); line-height: 1.85;
+    max-width: 540px; margin: 0 auto;
+  }
+
+  /* For both sides card */
+  .both-sides {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;
+  }
+  .side-card {
+    background: rgba(255,255,255,0.72); border: 1px solid rgba(187,210,240,0.8);
+    border-radius: 22px; padding: 32px 34px;
+    box-shadow: 0 4px 20px rgba(42,108,196,0.05); backdrop-filter: blur(10px);
+  }
+  .side-card .side-icon {
+    width: 48px; height: 48px; margin-bottom: 16px; display: block;
+  }
+  .side-card h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.1rem;
+    font-weight: 600; color: var(--dark); margin-bottom: 12px;
+  }
+  .side-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 10px; }
+  .side-card p:last-child { margin-bottom: 0; }
+
+  /* CTA */
+  .cta-card {
+    background: rgba(14,30,56,0.92); border-radius: 28px;
+    padding: 52px 60px; text-align: center;
+  }
+  .cta-card h2 {
+    font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600; color: #fff; margin-bottom: 14px; line-height: 1.3;
+  }
+  .cta-card p { font-size: 0.95rem; color: rgba(255,255,255,0.55); line-height: 1.75; margin-bottom: 28px; max-width: 460px; margin-left: auto; margin-right: auto; }
+  .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-block; background: var(--base);
+    color: var(--dark); font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 600; padding: 13px 28px;
+    border-radius: 50px; text-decoration: none; transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-outline {
+    display: inline-block; border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.75); font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 500; padding: 13px 28px;
+    border-radius: 50px; text-decoration: none; transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+
+  footer { background: rgba(14,30,56,0.95); padding: 36px 60px 28px; }
+  .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: #fff; text-decoration: none; }
+  .footer-logo span { color: var(--base); }
+  .footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+  .footer-legal { display: flex; gap: 20px; flex-wrap: wrap; }
+  .footer-legal a { font-size: 0.8rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+  .footer-legal a:hover { color: rgba(255,255,255,0.8); }
+
+  @media (max-width: 720px) {
+    nav { padding: 0 20px; }
+    .hero { padding: 120px 20px 60px; }
+    .story, .mission { padding: 36px 24px; }
+    .values-grid { grid-template-columns: 1fr 1fr; }
+    .stats { grid-template-columns: 1fr; padding: 36px 28px; }
+    .both-sides { grid-template-columns: 1fr; }
+    .cta-card { padding: 40px 24px; }
+    footer { padding: 28px 20px; }
+  }
+  @media (max-width: 480px) {
+    .values-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html"><span>Laundr</span>ify</a>
+  <a class="nav-back" href="index.html">Back to Home</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="page-tag">About Us</span>
+  <h1>Laundry, <em>simplified</em><br>for everyone.</h1>
+  <p>We built Laundrify because getting your laundry done shouldn't be complicated. Clean clothes matter — and the people who clean them deserve better tools too.</p>
+  <div class="hero-meta">
+    📍 Built in <span> Nigeria</span> &nbsp;·&nbsp; 🚀 Est. <span>2026</span>
+  </div>
+</section>
+
+<div class="content">
+
+  <!-- STORY -->
+  <div class="story">
+    <span class="story-label">Our Story</span>
+    <h2>It started with a simple frustration.</h2>
+    <p>Getting laundry done has always been more complicated than it needs to be. You either know someone, rely on word of mouth, or just figure it out yourself. There was no easy, reliable way to find a quality dry cleaner near you, book them without the back and forth, and trust that your clothes would come back the way they left.</p>
+    <p>At the same time, talented dry cleaning businesses — people who are genuinely good at what they do — had no real way to reach new customers beyond their immediate neighbourhood. No platform. No visibility. No tools to manage orders professionally.</p>
+
+    <div class="pull-quote">
+      <p>"What if finding a dry cleaner was as easy as booking a ride — and running one was just as straightforward?"</p>
+    </div>
+
+    <p>That question is what became Laundrify. A platform that connects customers who need their clothes taken care of with the skilled professionals who can do it — <strong>simply, reliably, and on both sides of the transaction.</strong></p>
+    <p>We're just getting started. But the problem we're solving is real, the people we're building for are real, and we're in this for the long run.</p>
+  </div>
+
+  <!-- VALUES -->
+  <div class="values-grid">
+    <div class="value-card">
+      <span class="value-icon">⚡</span>
+      <h3>Simplicity</h3>
+      <p>Every feature we build has to make things easier — for the customer booking a clean or the partner managing their orders. If it adds friction, it doesn't ship.</p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">🤝</span>
+      <h3>Trust</h3>
+      <p>You're handing over your clothes. Your partner is building a business. Both sides need to know the platform has their back. That's not a feature — it's the foundation.</p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">📈</span>
+      <h3>Partnership</h3>
+      <p>Laundrify grows when our partners grow. We're not extracting value from dry cleaners — we're building tools that help them run better businesses and reach more customers.</p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">🔍</span>
+      <h3>Transparency</h3>
+      <p>Clear pricing. Clear commissions. Clear policies. No hidden fees, no surprises. What you see is what you get — for customers and partners alike.</p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">🛡️</span>
+      <h3>Safety</h3>
+      <p>Every partner is identity-verified. Every transaction is protected. Every dispute is investigated fairly. Safety on Laundrify isn't optional — it's built in.</p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">✨</span>
+      <h3>Built for ease</h3>
+      <p>Laundrify is built with simplicity in mind — for customers and partners alike. No unnecessary steps, no confusing workflows, just a clean, intuitive experience that makes laundry management effortless.</p>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat-item">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Apps — one for customers,<br>one for dry cleaners</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1</div>
+      <div class="stat-label">Mission — make laundry<br>effortless for everyone</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">NG</div>
+      <div class="stat-label">Starting in Nigeria,<br>built to scale</div>
+    </div>
+  </div>
+
+  <!-- MISSION -->
+  <div class="mission">
+    <span class="mission-label">Our Mission</span>
+    <h2>Connect people with the services they need — and the tools to deliver them.</h2>
+    <p>Laundrify exists to close the gap between the millions of people who need quality laundry services and the skilled professionals who provide them. We do that by building technology that makes the connection seamless, the transaction safe, and the experience worth coming back to — on both sides.</p>
+  </div>
+
+  <!-- FOR BOTH SIDES -->
+  <div class="both-sides">
+    <div class="side-card">
+      <img class="side-icon" src="assets/icons/icon.png" alt="Customers icon">
+      <h3>For Customers</h3>
+      <p>Find verified dry cleaners near you, book in seconds, track your order in real time, and pay securely — all without a single phone call.</p>
+      <p>No more asking around, no more uncertainty, no more chasing people for updates. Just clean clothes, done properly.</p>
+    </div>
+    <div class="side-card">
+      <img class="side-icon" src="assets/icons/drycleaners-icon.png" alt="Dry cleaners icon">
+      <h3>For Dry Cleaners</h3>
+      <p>Get discovered by customers in your area, manage your orders from a single dashboard, and receive weekly payouts directly to your bank account.</p>
+      <p>Focus on doing what you do best. Let Laundrify handle the rest — the bookings, the payments, the customer communications.</p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-card">
+    <h2>Be part of what we're building.</h2>
+    <p>Whether you're looking for a better way to get your laundry done or you're a dry cleaner ready to grow your business — Laundrify is for you.</p>
+    <div class="cta-btns">
+      <a href="index.html" class="btn-primary">🡻 Download the App</a>
+      <a href="mailto:hi@laundrify.com.ng" class="btn-outline">🧑‍💻 Get in touch</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <a class="footer-logo" href="index.html"><span>Laundr</span>ify</a>
+    <p>© 2026 Unang Tech. All rights reserved.</p>
+    <div class="footer-legal">
+      <a href="terms-of-service.html">Terms of Service</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="cookie-policy.html">Cookie Policy</a>
+      <a href="partner-agreement.html">Partner Agreement</a>
+      <a href="refund-policy.html">Refund Policy</a>
+      <a href="community-guidelines.html">Community Guidelines</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

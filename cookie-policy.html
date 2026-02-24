@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookie Policy — Laundrify</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --base: #bbd2f0; --base-light: #ddeaf8;
+    --blue: #2a6cc4; --blue-deep: #1a4a9e; --dark: #0e1e38;
+    --text: #0e1e38; --text-muted: #4a6080;
+    --grad: linear-gradient(160deg, #ffffff 0%, #ddeaf8 30%, #bbd2f0 65%, #8ab8e8 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--grad); min-height: 100vh; color: var(--text); }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 52px; height: 68px;
+    background: rgba(255,255,255,0.6); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(187,210,240,0.6);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 600; color: var(--dark); text-decoration: none; }
+  .nav-logo span { color: var(--blue); }
+  .nav-back { color: var(--text-muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+  .nav-back::before { content: '← '; }
+  .nav-back:hover { color: var(--dark); }
+
+  .page-hero { padding: 120px 24px 52px; text-align: center; max-width: 800px; margin: 0 auto; }
+  .page-tag {
+    display: inline-block; background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(42,108,196,0.25); border-radius: 50px;
+    padding: 5px 18px; font-size: 0.75rem; font-weight: 500; color: var(--blue);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 20px;
+  }
+  .page-hero h1 {
+    font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600; color: var(--dark); line-height: 1.2; margin-bottom: 14px;
+  }
+  .page-hero p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; max-width: 580px; margin: 0 auto; }
+  .last-updated {
+    display: inline-block; margin-top: 14px; font-size: 0.8rem; color: var(--text-muted);
+    background: rgba(255,255,255,0.6); border-radius: 50px;
+    padding: 4px 14px; border: 1px solid rgba(187,210,240,0.6);
+  }
+
+  .toc-wrap { max-width: 800px; margin: 0 auto 24px; padding: 0 24px; }
+  .toc-box {
+    background: rgba(255,255,255,0.65); border: 1px solid rgba(187,210,240,0.8);
+    border-radius: 20px; padding: 28px 40px; backdrop-filter: blur(10px);
+  }
+  .toc-box h2 {
+    font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600;
+    color: var(--dark); margin-bottom: 14px; padding-bottom: 10px;
+    border-bottom: 1px solid rgba(187,210,240,0.7);
+  }
+  .toc-list { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 3px 24px; }
+  .toc-list a {
+    color: var(--blue); text-decoration: none; font-size: 0.81rem;
+    padding: 5px 0; display: block; border-bottom: 1px solid rgba(187,210,240,0.3); transition: color 0.2s;
+  }
+  .toc-list a:hover { color: var(--blue-deep); }
+
+  .legal-content { max-width: 800px; margin: 0 auto 80px; padding: 0 24px; }
+  .legal-card {
+    background: rgba(255,255,255,0.7); border: 1px solid rgba(187,210,240,0.8);
+    border-radius: 24px; padding: 52px 56px; backdrop-filter: blur(10px);
+    box-shadow: 0 4px 32px rgba(42,108,196,0.07);
+  }
+
+  .summary-banner {
+    background: rgba(42,108,196,0.06); border: 1px solid rgba(42,108,196,0.18);
+    border-radius: 14px; padding: 22px 28px; margin-bottom: 44px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .summary-banner .icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 2px; }
+  .summary-banner p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.85; }
+  .summary-banner strong { color: var(--dark); }
+
+  .legal-section { margin-bottom: 42px; scroll-margin-top: 90px; }
+  .legal-section:last-child { margin-bottom: 0; }
+  .legal-section h2 {
+    font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600;
+    color: var(--dark); margin-bottom: 14px; padding-bottom: 10px;
+    border-bottom: 1px solid rgba(187,210,240,0.7);
+  }
+  .legal-section h3 { font-size: 0.95rem; font-weight: 600; color: var(--dark); margin: 20px 0 8px; }
+  .legal-section p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 12px; }
+  .legal-section p:last-child { margin-bottom: 0; }
+  .legal-section ul { padding-left: 22px; margin-bottom: 12px; }
+  .legal-section li { font-size: 0.92rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 7px; }
+
+  .cookie-table {
+    width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.86rem;
+  }
+  .cookie-table th {
+    background: rgba(42,108,196,0.08); color: var(--dark); font-weight: 600;
+    padding: 10px 14px; text-align: left; border-bottom: 2px solid rgba(187,210,240,0.7);
+  }
+  .cookie-table td {
+    padding: 10px 14px; border-bottom: 1px solid rgba(187,210,240,0.4);
+    color: var(--text-muted); vertical-align: top; line-height: 1.6;
+  }
+  .cookie-table tr:last-child td { border-bottom: none; }
+  .badge {
+    display: inline-block; font-size: 0.72rem; font-weight: 600; padding: 2px 9px;
+    border-radius: 50px; white-space: nowrap;
+  }
+  .badge-green { background: rgba(34,197,94,0.12); color: #15803d; border: 1px solid rgba(34,197,94,0.3); }
+  .badge-blue { background: rgba(42,108,196,0.1); color: var(--blue); border: 1px solid rgba(42,108,196,0.25); }
+  .badge-grey { background: rgba(100,116,139,0.1); color: #475569; border: 1px solid rgba(100,116,139,0.25); }
+
+  .notice-box {
+    background: rgba(42,108,196,0.05); border-left: 3px solid var(--blue);
+    border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 14px 0;
+    font-size: 0.88rem; color: var(--text-muted); line-height: 1.75;
+  }
+  .notice-box strong { color: var(--dark); }
+
+  .steps { counter-reset: step; padding: 0; list-style: none; margin: 14px 0; }
+  .steps li {
+    counter-increment: step; display: flex; gap: 14px; align-items: flex-start;
+    margin-bottom: 14px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.75;
+  }
+  .steps li::before {
+    content: counter(step); flex-shrink: 0;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--blue); color: #fff;
+    font-size: 0.75rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; margin-top: 1px;
+  }
+
+  .contact-box {
+    background: linear-gradient(135deg, rgba(42,108,196,0.08), rgba(187,210,240,0.2));
+    border: 1px solid rgba(42,108,196,0.2); border-radius: 16px; padding: 28px 32px; margin-top: 44px;
+  }
+  .contact-box h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--dark); margin-bottom: 10px; }
+  .contact-box p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 5px; line-height: 1.7; }
+  .contact-box a { color: var(--blue); text-decoration: none; font-weight: 500; }
+
+  footer { background: rgba(14,30,56,0.95); padding: 36px 60px 28px; }
+  .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: #fff; text-decoration: none; }
+  .footer-logo span { color: var(--base); }
+  .footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+  .footer-legal { display: flex; gap: 20px; flex-wrap: wrap; }
+  .footer-legal a { font-size: 0.8rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+  .footer-legal a:hover { color: rgba(255,255,255,0.8); }
+
+  @media (max-width: 680px) {
+    nav { padding: 0 20px; }
+    .legal-card { padding: 32px 22px; }
+    .toc-box { padding: 22px 20px; }
+    .toc-list { grid-template-columns: 1fr; }
+    footer { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html"><span>Laundr</span>ify</a>
+  <a class="nav-back" href="index.html">Back to Home</a>
+</nav>
+
+<section class="page-hero">
+  <span class="page-tag">Legal</span>
+  <h1>Cookie Policy</h1>
+  <p>This policy explains what cookies are, whether we use them, and what your choices are.</p>
+  <span class="last-updated">Last updated: February 15, 2026</span>
+</section>
+
+<div class="toc-wrap">
+  <div class="toc-box">
+    <h2>Table of Contents</h2>
+    <ul class="toc-list">
+      <li><a href="#s1">1. What Are Cookies?</a></li>
+      <li><a href="#s2">2. Do Our Apps Use Cookies?</a></li>
+      <li><a href="#s3">3. Cookies on Our Website</a></li>
+      <li><a href="#s4">4. The Cookies We Use</a></li>
+      <li><a href="#s6">5. Your Cookie Choices</a></li>
+      <li><a href="#s7">6. What Happens If You Disable Cookies</a></li>
+      <li><a href="#s8">7. Changes to This Policy</a></li>
+      <li><a href="#s9">8. Contact Us</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="legal-content">
+  <div class="legal-card">
+
+    <div class="summary-banner">
+      <span class="icon">🍪</span>
+      <p><strong>Short version:</strong> Our mobile apps (Laundrify and Laundrify DryCleaners) do not use cookies — cookies are a web browser technology and do not apply to apps. Our website, laundrify.com.ng, uses only essential cookies that are strictly necessary to make the site work. We do not currently use any tracking, advertising, or analytics cookies. You are in control.</p>
+    </div>
+
+    <!-- SECTION 1 -->
+    <div class="legal-section" id="s1">
+      <h2>1. What Are Cookies?</h2>
+      <p>Cookies are small text files that a website places on your device (computer, phone, or tablet) when you visit it. They are widely used to make websites work properly, remember your preferences, and provide information to the website owner.</p>
+      <p>Cookies are set and read by web browsers. They are a browser and website technology — they do not apply to native mobile applications.</p>
+      <p>There are different types of cookies:</p>
+      <ul>
+        <li><strong>Session cookies</strong> — temporary cookies that are deleted when you close your browser.</li>
+        <li><strong>Persistent cookies</strong> — cookies that remain on your device for a set period of time or until you delete them.</li>
+        <li><strong>First-party cookies</strong> — cookies set directly by the website you are visiting.</li>
+        <li><strong>Third-party cookies</strong> — cookies set by a domain other than the website you are visiting, typically used for advertising or analytics.</li>
+      </ul>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="legal-section" id="s2">
+      <h2>2. Do Our Apps Use Cookies?</h2>
+      <p><strong>No.</strong> The Laundrify customer app and the Laundrify DryCleaners dry cleaner app are native mobile applications running on iOS and Android. Mobile apps do not use cookies. Instead, they use device-level storage mechanisms (such as secure local storage and authentication tokens) to maintain your session and preferences.</p>
+      <p>The handling of data within the apps is governed by our <a href="privacy-policy.html" style="color:var(--blue); font-weight:500;">Privacy Policy</a>, not this Cookie Policy.</p>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="legal-section" id="s3">
+      <h2>3. Cookies on Our Website</h2>
+      <p>Our website, <a href="https://laundrify.com.ng" style="color:var(--blue);">laundrify.com.ng</a>, is a marketing and information page. It may use a small number of cookies that are strictly necessary to make the site function correctly.</p>
+      <p>We do <strong>not</strong> currently use:</p>
+      <ul>
+        <li>Analytics or tracking cookies (e.g., Google Analytics)</li>
+        <li>Advertising or retargeting cookies</li>
+        <li>Social media tracking cookies</li>
+        <li>Any cookies that profile you or track you across other websites</li>
+      </ul>
+      <p>If we introduce any of these in the future, we will update this policy, add them to the table in Section 4, and ask for your consent through our cookie consent banner before setting them.</p>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="legal-section" id="s4">
+      <h2>4. The Cookies We Use</h2>
+      <p>The following table describes the cookies currently in use on laundrify.com.ng:</p>
+
+      <table class="cookie-table">
+        <thead>
+          <tr>
+            <th>Cookie Name</th>
+            <th>Type</th>
+            <th>Purpose</th>
+            <th>Duration</th>
+            <th>Consent Required?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>cookieconsent_status</code></td>
+            <td><span class="badge badge-green">Essential</span></td>
+            <td>Remembers whether you have accepted or declined the cookie consent banner, so we don't show it to you on every page load.</td>
+            <td>1 year</td>
+            <td>No — essential</td>
+          </tr>
+          <tr>
+            <td>Session cookie</td>
+            <td><span class="badge badge-green">Essential</span></td>
+            <td>Maintains basic website functionality and security during your visit. Deleted when you close your browser.</td>
+            <td>Session</td>
+            <td>No — essential</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="notice-box">
+        <strong>Note:</strong> We only use essential cookies. Essential cookies do not require your consent under law or most international privacy frameworks, because they are strictly necessary for the website to function. You cannot opt out of strictly necessary cookies without affecting how the site works.
+      </div>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="legal-section" id="s6">
+      <h2>5. Your Cookie Choices</h2>
+      <p>You have several ways to control cookies:</p>
+
+      <h3>Via our cookie consent banner</h3>
+      <p>When you first visit laundrify.com.ng, you will see a cookie consent banner. Since we only use essential cookies, the banner is informational — but you can acknowledge it and update your preferences at any time by clicking the "Update cookie preferences" link in the footer of our website.</p>
+
+      <h3>Via your browser settings</h3>
+      <p>You can instruct your browser to refuse all cookies or to alert you when cookies are being set. Here is how to manage cookies in the most common browsers:</p>
+      <ul>
+        <li><strong>Google Chrome:</strong> Settings → Privacy and security → Cookies and other site data</li>
+        <li><strong>Safari:</strong> Settings → Safari → Privacy & Security → Block All Cookies</li>
+        <li><strong>Mozilla Firefox:</strong> Settings → Privacy & Security → Cookies and Site Data</li>
+        <li><strong>Microsoft Edge:</strong> Settings → Cookies and site permissions → Cookies and site data</li>
+        <li><strong>Opera:</strong> Settings → Advanced → Privacy & security → Site Settings → Cookies</li>
+      </ul>
+
+      <h3>Via your mobile browser</h3>
+      <ul>
+        <li><strong>Chrome on Android:</strong> Menu → Settings → Site settings → Cookies</li>
+        <li><strong>Safari on iOS:</strong> Settings → Safari → Block All Cookies</li>
+      </ul>
+    </div>
+
+    <!-- SECTION 6-->
+    <div class="legal-section" id="s7">
+      <h2>6. What Happens If You Disable Cookies</h2>
+      <p>Since we only use essential cookies on our website, disabling cookies may affect the basic functionality of laundrify.com.ng. Specifically:</p>
+      <ul>
+        <li>The cookie consent banner may reappear on every visit because your preference cannot be saved.</li>
+        <li>Certain page functionality that relies on session state may not work as expected.</li>
+      </ul>
+      <p>Disabling cookies will have <strong>no effect on the Laundrify or Laundrify DryCleaners mobile apps</strong>, as they do not use cookies.</p>
+    </div>
+
+    <!-- SECTION 7 -->
+    <div class="legal-section" id="s8">
+      <h2>7. Changes to This Policy</h2>
+      <p>We may update this Cookie Policy from time to time, particularly if we introduce new features on our website that require additional cookies. Any changes will be reflected on this page with an updated "Last updated" date.</p>
+      <p>If we introduce any non-essential cookies in the future — such as analytics or advertising cookies — we will update the cookie table in Section 4 and obtain your consent through our cookie consent banner before setting those cookies.</p>
+      <p>We encourage you to review this policy periodically so you are always informed about how we use cookies.</p>
+    </div>
+
+    <!-- SECTION 8 -->
+    <div class="legal-section" id="s9">
+      <h2>8. Contact Us</h2>
+      <p>If you have any questions about this Cookie Policy or how we use cookies, please contact us:</p>
+    </div>
+
+    <div class="contact-box">
+      <h3>Unang Tech</h3>
+      <p>Email: <a href="mailto:hi@laundrify.com.ng">hi@laundrify.com.ng</a></p>
+      <p>Phone: <a href="tel:+2347040745661">+2347040745661</a></p>
+      <p>Address: 24 Lunguda street, G/lada, G/lada, Federal capital territory 902301, Nigeria</p>
+      <p>Website: <a href="https://laundrify.com.ng" target="_blank">laundrify.com.ng</a></p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <a class="footer-logo" href="index.html"><span>Laundr</span>ify</a>
+    <p>© 2026 Unang Tech. All rights reserved.</p>
+    <div class="footer-legal">
+      <a href="terms-of-service.html">Terms of Service</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="cookie-policy.html">Cookie Policy</a>
+      <a href="partner-agreement.html">Partner Agreement</a>
+      <a href="refund-policy.html">Refund Policy</a>
+      <a href="community-guidelines.html">Community Guidelines</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
