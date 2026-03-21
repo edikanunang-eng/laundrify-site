@@ -4,3 +4,9 @@ laundrify.html
 x.html
 .env
 polar.html
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
