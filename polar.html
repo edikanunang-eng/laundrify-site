@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laundrify</title>
+<link rel="icon" type="image/png" href="assets/icons/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --base: #bbd2f0; --base-light: #ddeaf8;
+    --blue: #2a6cc4; --blue-deep: #1a4a9e; --dark: #0e1e38;
+    --text: #0e1e38; --text-muted: #4a6080;
+    --grad: linear-gradient(160deg, #ffffff 0%, #ddeaf8 30%, #bbd2f0 65%, #8ab8e8 100%);
+    --green: #15803d; --green-bg: rgba(34,197,94,0.08);
+    --red: #b91c1c; --red-bg: rgba(239,68,68,0.07); --red-border: rgba(239,68,68,0.22);
+    --amber: #92400e; --amber-bg: rgba(251,191,36,0.1);
+    --orange: #ea580c; --orange-bg: rgba(234,88,12,0.08);
+  }
+  html, body { width: 100%; overflow-x: hidden; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--grad); min-height: 100vh; color: var(--text); }
+
+  /* LOGIN */
+  .login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .login-card {
+    background: rgba(255,255,255,0.75); border: 1px solid rgba(187,210,240,0.8);
+    border-radius: 24px; padding: 48px 44px; max-width: 400px; width: 100%;
+    box-shadow: 0 8px 48px rgba(42,108,196,0.12); backdrop-filter: blur(12px); text-align: center;
+  }
+  .login-logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
+  .login-logo span { color: var(--blue); }
+  .login-tag { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 32px; display: block; }
+  .login-card h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--dark); margin-bottom: 8px; }
+  .login-card p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 28px; line-height: 1.6; }
+  .input-group { margin-bottom: 14px; text-align: left; }
+  .input-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .input-group input {
+    width: 100%; padding: 12px 16px; border-radius: 12px;
+    border: 1.5px solid rgba(187,210,240,0.9); background: rgba(255,255,255,0.8);
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--dark);
+    outline: none; transition: border-color 0.2s;
+  }
+  .input-group input:focus { border-color: var(--blue); }
+  .login-btn {
+    width: 100%; padding: 13px; border-radius: 12px; background: var(--blue-deep); color: #fff;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600;
+    border: none; cursor: pointer; margin-top: 8px; transition: background 0.2s;
+  }
+  .login-btn:hover { background: var(--blue); }
+  .login-error { background: var(--red-bg); border: 1px solid var(--red-border); border-radius: 10px; padding: 10px 14px; margin-top: 14px; font-size: 0.85rem; color: var(--red); display: none; }
+
+  /* ADMIN */
+  .admin-screen { display: none; }
+  
+  /* TABS */
+  .tabs-container { display: flex; gap: 0; border-bottom: 2px solid rgba(187,210,240,0.6); margin-bottom: 32px; overflow-x: auto; }
+  .tab-btn { 
+    flex-shrink: 0; padding: 14px 20px; border: none; background: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500;
+    color: var(--text-muted); border-bottom: 3px solid transparent; transition: all 0.2s; white-space: nowrap;
+  }
+  .tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
+  .tab-btn:hover { color: var(--text); }
+  
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 52px; height: 68px;
+    background: rgba(255,255,255,0.6); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(187,210,240,0.6);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 600; color: var(--dark); }
+  .nav-logo span { color: var(--blue); }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .nav-tag { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--blue); background: rgba(42,108,196,0.08); border: 1px solid rgba(42,108,196,0.2); border-radius: 50px; padding: 4px 12px; }
+  .logout-btn { font-size: 0.85rem; color: var(--text-muted); background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; font-weight: 500; transition: color 0.2s; }
+  .logout-btn:hover { color: var(--red); }
+
+  .admin-content { max-width: 900px; margin: 0 auto; padding: 100px 24px 80px; }
+  .welcome-text { margin-bottom: 36px; }
+  .welcome-text h1 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
+  .welcome-text p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; }
+
+  /* STATS */
+  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; }
+  .stat-card { background: rgba(255,255,255,0.72); border: 1px solid rgba(187,210,240,0.8); border-radius: 16px; padding: 20px 22px; box-shadow: 0 4px 20px rgba(42,108,196,0.06); }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 600; color: var(--dark); line-height: 1; margin-bottom: 4px; }
+  .stat-label { font-size: 0.78rem; color: var(--text-muted); font-weight: 500; }
+
+  /* FORM */
+  .form-card { background: rgba(255,255,255,0.72); border: 1px solid rgba(187,210,240,0.8); border-radius: 24px; padding: 36px 40px; box-shadow: 0 4px 32px rgba(42,108,196,0.07); margin-bottom: 20px; }
+  .form-card h2 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+  .form-sub { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 24px; padding-bottom: 18px; border-bottom: 1px solid rgba(187,210,240,0.6); }
+
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 7px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .field input, .field textarea, .field select {
+    width: 100%; padding: 12px 16px; border-radius: 12px;
+    border: 1.5px solid rgba(187,210,240,0.9); background: rgba(255,255,255,0.8);
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--dark);
+    outline: none; transition: border-color 0.2s;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--blue); }
+  .field textarea { min-height: 90px; resize: vertical; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  /* TOGGLE SWITCH */
+  .toggle-switch {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px; background: rgba(255,255,255,0.5); border-radius: 12px; margin-bottom: 16px;
+  }
+  .switch {
+    position: relative; width: 50px; height: 28px;
+    background: #ccc; border-radius: 14px; cursor: pointer;
+    transition: background 0.3s; flex-shrink: 0;
+  }
+  .switch.active { background: var(--green); }
+  .switch::after {
+    content: ''; position: absolute; top: 2px; left: 2px;
+    width: 24px; height: 24px; background: white;
+    border-radius: 12px; transition: left 0.3s;
+  }
+  .switch.active::after { left: 24px; }
+  .switch-label { flex: 1; }
+  .switch-label-text { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+  .switch-label-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+
+  /* TABLE */
+  .table-card { background: rgba(255,255,255,0.72); border: 1px solid rgba(187,210,240,0.8); border-radius: 24px; padding: 36px 40px; box-shadow: 0 4px 32px rgba(42,108,196,0.07); }
+  .table-card h2 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+  .table-sub { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 24px; padding-bottom: 18px; border-bottom: 1px solid rgba(187,210,240,0.6); }
+  
+  .table-scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; }
+  table thead th { 
+    font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--text-muted); padding: 14px 10px; text-align: left; border-bottom: 1px solid rgba(187,210,240,0.6);
+  }
+  table tbody tr { border-bottom: 1px solid rgba(187,210,240,0.3); }
+  table tbody tr:last-child { border-bottom: none; }
+  table tbody td { padding: 12px 10px; font-size: 0.85rem; }
+  
+  .code-badge { background: rgba(42,108,196,0.1); color: var(--blue); padding: 4px 10px; border-radius: 6px; font-weight: 600; display: inline-block; }
+  .status-active { background: var(--green-bg); color: var(--green); padding: 4px 10px; border-radius: 6px; font-weight: 600; display: inline-block; }
+  .status-inactive { background: var(--red-bg); color: var(--red); padding: 4px 10px; border-radius: 6px; font-weight: 600; display: inline-block; }
+
+  .btn-small { padding: 8px 14px; background: var(--blue); color: #fff; border: none; border-radius: 8px; font-size: 0.78rem; cursor: pointer; font-weight: 600; transition: background 0.2s; }
+  .btn-small:hover { background: var(--blue-deep); }
+  .btn-small.danger { background: var(--red); }
+  .btn-small.danger:hover { background: #8b0000; }
+  .btn-small.success { background: var(--green); }
+  .btn-small.success:hover { background: #0d6e3b; }
+
+  .send-btn {
+    width: 100%; padding: 14px; border-radius: 14px; margin-top: 20px;
+    background: var(--blue-deep); color: #fff;
+    font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600;
+    border: none; cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .send-btn:hover { background: var(--blue); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(42,108,196,0.3); }
+  .send-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  /* TOAST */
+  .toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(100px); border-radius: 50px; padding: 12px 24px; font-size: 0.88rem; font-weight: 500; display: flex; align-items: center; gap: 8px; z-index: 999; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none; white-space: nowrap; }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+  .toast.success { background: #0e1e38; color: #bbd2f0; }
+  .toast.error { background: #b91c1c; color: #fff; }
+
+  .empty-state { text-align: center; padding: 48px 20px; color: var(--text-muted); }
+  .empty-state-icon { font-size: 3rem; margin-bottom: 12px; }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 16px; }
+    .form-card, .table-card { padding: 24px 20px; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .stats-row .stat-card:last-child { grid-column: span 2; }
+    .two-col { grid-template-columns: 1fr; }
+    .tabs-container { -webkit-overflow-scrolling: touch; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo"><span>Laundr</span>ify</div>
+    <span class="login-tag">Admin Panel</span>
+    <h2>Sign in to continue</h2>
+    <p>This page is for Laundrify admins only. Enter your admin password to access the dashboard.</p>
+    <div class="input-group">
+      <label>Admin Password</label>
+      <input type="password" id="passwordInput" placeholder="Enter password" onkeydown="if(event.key==='Enter') login()">
+    </div>
+    <button class="login-btn" onclick="login()">Sign In</button>
+    <div class="login-error" id="loginError">Incorrect password. Try again.</div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin-screen" id="adminScreen">
+  <nav>
+    <span class="nav-logo"><span>Laundr</span>ify</span>
+    <div class="nav-right">
+      <span class="nav-tag">Admin</span>
+      <button class="logout-btn" onclick="logout()">Sign out</button>
+    </div>
+  </nav>
+
+  <div class="admin-content">
+    <!-- TABS -->
+    <div class="tabs-container">
+      <button class="tab-btn active" onclick="switchTab('popup')">📱 Popup Manager</button>
+      <button class="tab-btn" onclick="switchTab('notifications')">📢 Notifications</button>
+      <button class="tab-btn" onclick="switchTab('promo')">🎟️ Promo Codes</button>
+      <button class="tab-btn" onclick="switchTab('payouts')">💰 Payouts Owed</button>
+      <button class="tab-btn" onclick="switchTab('versions')">📱 App Versions</button>
+      <button class="tab-btn" onclick="switchTab('settings')">⚙️ Settings</button>
+    </div>
+
+    <!-- POPUP MANAGER TAB -->
+    <div id="popup" class="tab-content active">
+      <div class="welcome-text">
+        <h1>Popup Manager</h1>
+        <p>Create and manage popup announcements that appear once when users open the app.</p>
+      </div>
+
+      <!-- POPUP EDITOR FORM -->
+      <div class="form-card">
+        <h2>Create/Edit Popup</h2>
+        <p class="form-sub">Write HTML content that will display as a popup. Users see it once per version.</p>
+
+        <div class="field">
+          <label>Popup Title (for your reference)</label>
+          <input type="text" id="popupTitle" placeholder="e.g. Welcome Announcement, New Feature, etc." maxlength="100">
+        </div>
+
+        <div class="field">
+          <label>Target App</label>
+          <select id="popupAppType">
+            <option value="customer">📱 Customer App</option>
+            <option value="dry-cleaner">🧺 Dry Cleaner App</option>
+            <option value="both">👥 Both Apps</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>HTML Content</label>
+          <textarea id="popupHtmlContent" placeholder="<h2>Welcome!</h2><p>What's new...</p><a href='https://example.com'>Learn More</a>" style="min-height: 200px; font-family: 'Courier New', monospace; font-size: 0.85rem;"></textarea>
+          <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 6px;">✓ Supports HTML tags: h1-h6, p, a, strong, em, img, button, ul, ol, li</p>
+        </div>
+
+        <div class="toggle-switch">
+          <div class="switch" id="popupToggle" onclick="togglePopupEnabled()"></div>
+          <div class="switch-label">
+            <div class="switch-label-text">Enable Popup</div>
+            <div class="switch-label-sub">When enabled, the popup will show to users the next time they open the app (one time only per version).</div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 12px;">
+          <button class="send-btn" onclick="savePopup()">Save & Deploy Popup</button>
+          <button class="send-btn" style="background: var(--red);" onclick="clearPopupForm()">Clear</button>
+        </div>
+      </div>
+
+      <!-- POPUP PREVIEW -->
+      <div class="form-card">
+        <h2>Live Preview</h2>
+        <p class="form-sub">See how your popup will look to users.</p>
+        <div style="
+          border: 2px solid rgba(187,210,240,0.6);
+          border-radius: 16px;
+          padding: 20px;
+          background: rgba(255,255,255,0.4);
+          max-height: 400px;
+          overflow-y: auto;
+          font-size: 0.9rem;
+          line-height: 1.6;
+          color: var(--text);
+        " id="popupPreview">
+          <p style="color: var(--text-muted); text-align: center;">Your HTML preview will appear here...</p>
+        </div>
+      </div>
+
+      <!-- POPUP HISTORY -->
+      <div class="table-card" style="margin-top: 20px;">
+        <h2>All Popups</h2>
+        <p class="table-sub">Manage all your active and archived popups.</p>
+        
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>App</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="popupHistoryBody">
+              <tr>
+                <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 28px;">Loading popups...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTIFICATIONS TAB -->
+    <div id="notifications" class="tab-content">
+      <div class="welcome-text">
+        <h1>Push Notifications</h1>
+        <p>Send announcements, updates, and promotions to your users instantly.</p>
+      </div>
+
+      <!-- STATS -->
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-num" id="statCustomers">—</div><div class="stat-label">Customers</div></div>
+        <div class="stat-card"><div class="stat-num" id="statCleaners">—</div><div class="stat-label">Dry Cleaners</div></div>
+        <div class="stat-card"><div class="stat-num" id="statTotal">—</div><div class="stat-label">Total Users</div></div>
+      </div>
+
+      <!-- FORM -->
+      <div class="form-card">
+        <h2>New Notification</h2>
+        <p class="form-sub">Write your message, pick your audience, and send.</p>
+
+        <div class="field">
+          <label>Title</label>
+          <input type="text" id="notifTitle" placeholder="e.g. New discount available 🎉" maxlength="65">
+        </div>
+
+        <div class="field">
+          <label>Message</label>
+          <textarea id="notifBody" placeholder="e.g. Get 20% off your next order this weekend only." maxlength="200"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Target Audience</label>
+          <select id="targetSelect">
+            <option value="all">👥 Everyone</option>
+            <option value="customers">📱 All Customers</option>
+            <option value="cleaners">🧺 All Dry Cleaners</option>
+          </select>
+        </div>
+
+        <button class="send-btn" onclick="sendNotification()">Send Notification</button>
+      </div>
+    </div>
+
+    <!-- SETTINGS TAB -->
+    <div id="settings" class="tab-content">
+      <div class="welcome-text">
+        <h1>System Settings</h1>
+        <p>Configure platform features and behavior.</p>
+      </div>
+
+      <div class="form-card">
+        <h2>Commission Disclaimer</h2>
+        <p class="form-sub">Control whether the commission disclaimer modal shows to new dry cleaner sign-ups.</p>
+
+        <div class="toggle-switch">
+          <div class="switch" id="disclaimerToggle" onclick="toggleDisclaimer()"></div>
+          <div class="switch-label">
+            <div class="switch-label-text">Show Commission Disclaimer</div>
+            <div class="switch-label-sub">When enabled, new dry cleaners will see the commission information modal after signup.</div>
+          </div>
+        </div>
+
+        <div style="padding: 16px; background: rgba(187,210,240,0.1); border-radius: 12px; margin-top: 16px; border-left: 4px solid var(--blue);">
+          <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+            <strong>How it works:</strong> New dry cleaners get 0% commission for their first 3 months from app launch. After that, 10% commission applies to services paid through the platform (excluding promos).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROMO CODES TAB -->
+    <div id="promo" class="tab-content">
+      <div class="welcome-text">
+        <h1>Promo Code Management</h1>
+        <p>Create and manage discount codes for your customers.</p>
+      </div>
+
+      <!-- CREATE PROMO FORM -->
+      <div class="form-card">
+        <h2>Create New Promo Code</h2>
+        <p class="form-sub">Set up a discount code and track its usage.</p>
+
+        <div class="field">
+          <label>Promo Code</label>
+          <input type="text" id="promoCode" placeholder="e.g. LAUNCH20" maxlength="50" onkeyup="this.value = this.value.toUpperCase()">
+        </div>
+
+        <div class="two-col">
+          <div class="field">
+            <label>Discount Type</label>
+            <select id="discountType" onchange="updatePromoPreview()">
+              <option value="percentage">Percentage (%)</option>
+              <option value="fixed">Fixed Amount (₦)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Discount Value</label>
+            <input type="number" id="discountValue" placeholder="e.g. 20" min="0" onchange="updatePromoPreview()">
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="field">
+            <label>Max Uses (Optional)</label>
+            <input type="number" id="maxUses" placeholder="Leave empty for unlimited" min="1">
+          </div>
+
+          <div class="field">
+            <label>Valid Until</label>
+            <input type="date" id="validUntil">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Minimum Order Value (Optional)</label>
+          <input type="number" id="minOrderValue" placeholder="e.g. 30000 - code only works on orders above this" min="0" step="100">
+          <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 6px;">Leave empty if no minimum. Code will only apply when cart total is at or above this amount.</p>
+        </div>
+
+        <button class="send-btn" onclick="createPromoCode()">Create Promo Code</button>
+      </div>
+
+      <!-- PROMO CODES TABLE -->
+      <div class="table-card">
+        <h2>Active Promo Codes</h2>
+        <p class="table-sub">Manage and monitor all active promotional codes.</p>
+        
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Discount</th>
+                <th>Uses</th>
+                <th>Expires</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="promoTableBody">
+              <tr>
+                <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 28px;">Loading promo codes...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- DISCOUNT TRACKING -->
+      <div class="table-card" style="margin-top: 20px;">
+        <h2>Discount Tracking</h2>
+        <p class="table-sub">See which orders used promo codes.</p>
+        
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Promo Code</th>
+                <th>Discount Amount</th>
+                <th>Original Price</th>
+                <th>Final Price</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="discountTableBody">
+              <tr>
+                <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 28px;">No discounts used yet.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- APP VERSIONS TAB -->
+    <div id="versions" class="tab-content">
+      <div class="welcome-text">
+        <h1>App Version Management</h1>
+        <p>Manage app versions and control update enforcement.</p>
+      </div>
+
+      <!-- CREATE NEW VERSION -->
+      <div class="form-card">
+        <h2>Release New Version</h2>
+        <p class="form-sub">Create a new app version and set update requirements.</p>
+
+        <div class="two-col">
+          <div class="field">
+            <label>App</label>
+            <select id="versionApp">
+              <option value="drycleaners">🧺 Dry Cleaners App</option>
+              <option value="customer">📱 Customer App</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Platform</label>
+            <select id="versionPlatform">
+              <option value="both">Both (iOS & Android)</option>
+              <option value="ios">iOS Only</option>
+              <option value="android">Android Only</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Version Number</label>
+          <input type="text" id="versionNumber" placeholder="e.g. 1.1.0" maxlength="20">
+        </div>
+
+        <div class="field">
+          <label>Changelog</label>
+          <textarea id="versionChangelog" placeholder="Describe what's new in this version..." maxlength="500"></textarea>
+        </div>
+
+        <div class="field">
+          <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 20px;">
+            <input type="checkbox" id="versionCritical" style="width: 18px; height: 18px;">
+            <span style="margin: 0;">This is a critical update (users MUST update)</span>
+          </label>
+        </div>
+
+        <button class="send-btn" onclick="releaseNewVersion()">Release Version</button>
+      </div>
+
+      <!-- VERSIONS TABLE -->
+      <div class="table-card">
+        <h2>Release History</h2>
+        <p class="table-sub">All released app versions.</p>
+        
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>App</th>
+                <th>Platform</th>
+                <th>Version</th>
+                <th>Released</th>
+                <th>Type</th>
+                <th>Changelog</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="versionsTableBody">
+              <tr>
+                <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 28px;">Loading versions...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- CURRENT VERSIONS -->
+      <div class="table-card" style="margin-top: 20px;">
+        <h2>Current Live Versions</h2>
+        <p class="table-sub">Latest version deployed for each platform.</p>
+        
+        <div id="currentVersionsContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;"></div>
+      </div>
+    </div>
+
+    <!-- PAYOUTS OWED TAB -->
+    <div id="payouts" class="tab-content">
+      <div class="welcome-text">
+        <h1>💰 Payouts Owed to Dry Cleaners</h1>
+        <p>Track discount amounts you owe to each dry cleaner from promo code usage.</p>
+      </div>
+
+      <!-- SUMMARY STATS -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-num" id="totalOweAmount">₦0</div>
+          <div class="stat-label">Total Owed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="cleanersWithPayouts">0</div>
+          <div class="stat-label">Cleaners with Discounts</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="totalDiscountsGiven">0</div>
+          <div class="stat-label">Total Discounts Given</div>
+        </div>
+      </div>
+
+      <!-- PAYOUTS LIST -->
+      <div id="payoutsContainer"></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // Environment Variables 
+  const ADMIN_PASSWORD = globalThis.ADMIN_PASSWORD
+  const SUPABASE_URL = globalThis.SUPABASE_URL
+  const SUPABASE_SECRET_KEY = globalThis.SUPABASE_SECRET_KEY
+
+  function login() {
+    const val = document.getElementById('passwordInput').value
+    if (val === ADMIN_PASSWORD) {
+      document.getElementById('loginScreen').style.display = 'none'
+      document.getElementById('adminScreen').style.display = 'block'
+      loadPopupStatus()
+      loadPopupHistory()
+      loadStats()
+      loadPromoCodesTable()
+      loadDiscountTracking()
+      loadPayoutsOwed()
+      loadDisclaimerStatus()
+    } else {
+      document.getElementById('loginError').style.display = 'block'
+      document.getElementById('passwordInput').value = ''
+      document.getElementById('passwordInput').focus()
+    }
+  }
+
+  function logout() {
+    document.getElementById('loginScreen').style.display = 'flex'
+    document.getElementById('adminScreen').style.display = 'none'
+    document.getElementById('passwordInput').value = ''
+  }
+
+  function switchTab(tabName) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'))
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'))
+    document.getElementById(tabName).classList.add('active')
+    event.target.classList.add('active')
+    
+    if (tabName === 'payouts') {
+      loadPayoutsOwed()
+    }
+    if (tabName === 'versions') {
+      loadVersionsTable()
+    }
+  }
+
+  // ===== POPUP FUNCTIONS =====
+
+  let currentPopupData = null;
+
+  async function loadPopupStatus() {
+    try {
+      const h = { 'apikey': SUPABASE_SECRET_KEY, 'Authorization': `Bearer ${SUPABASE_SECRET_KEY}` }
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/popup_settings?is_enabled=eq.true&order=updated_at.desc`,
+        { headers: h }
+      )
+      const popups = await res.json()
+
+      const statusContainer = document.getElementById('popupStatusContainer')
+      const statusHtml = (popups || []).map(popup => `
+        <div style="background: rgba(255,255,255,0.72); border: 1px solid rgba(187,210,240,0.8); border-radius: 16px; padding: 20px;">
+          <div style="font-size: 0.9rem; font-weight: 600; color: var(--dark); margin-bottom: 12px;">
+            ${popup.title || 'Untitled Popup'}
+          </div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">
+            ${popup.app_type === 'customer' ? '📱 Customer' : popup.app_type === 'dry-cleaner' ? '🧺 Dry Cleaner' : '👥 Both Apps'}
+          </div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">
+            Version: <strong>${popup.version}</strong>
+          </div>
+          <span class="payout-status paid" style="background: rgba(34,197,94,0.1); color: #15803d; margin-top: 8px;">
+            ✓ Active
+          </span>
+          <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 12px;">
+            Updated: ${new Date(popup.updated_at).toLocaleDateString()}
+          </div>
+        </div>
+      `).join('')
+
+      statusContainer.innerHTML = statusHtml || '<p style="color: var(--text-muted);">No active popups.</p>'
+    } catch (e) {
+      console.error('Error loading popup status:', e)
+    }
+  }
+
+  async function loadPopupHistory() {
+    try {
+      const h = { 'apikey': SUPABASE_SECRET_KEY, 'Authorization': `Bearer ${SUPABASE_SECRET_KEY}` }
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/popup_settings?order=updated_at.desc`,
+        { headers: h }
+      )
+      const popups = await res.json()
+
+      const tbody = document.getElementById('popupHistoryBody')
+      if (!popups || !popups.length) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 28px;">No popups created yet.</td></tr>'
+        return
+      }
+
+      tbody.innerHTML = popups.map(p => `
+        <tr>
+          <td style="font-weight: 500;">${p.title || 'Untitled'}</td>
+          <td>${p.app_type === 'customer' ? '📱 Customer' : p.app_type === 'dry-cleaner' ? '🧺 Dry Cleaner' : '👥 Both'}</td>
+          <td>
+            <span class="payout-status ${p.is_enabled ? 'paid' : 'pending'}" style="background: ${p.is_enabled ? 'rgba(34,197,94,0.1)' : 'rgba(255,152,0,0.1)'}; color: ${p.is_enabled ? '#15803d' : '#ea580c'};">
+              ${p.is_enabled ? '✓ Active' : '○ Disabled'}
+            </span>
+          </td>
+          <td>${new Date(p.created_at).toLocaleDateString()}</td>
+          <td>${new Date(p.updated_at).toLocaleDateString()}</td>
+          <td>
+            <button class="btn-small" onclick="loadPopupForEdit({id: '${p.id}', title: ${JSON.stringify(p.title)}, app_type: '${p.app_type}', html_content: ${JSON.stringify(p.html_content)}, is_enabled: ${p.is_enabled}, version: ${p.version}})">Edit</button>
+            <button class="btn-small danger" onclick="deletePopupById('${p.id}', ${JSON.stringify(p.title)})" style="margin-left: 6px;">Delete</button>
+          </td>
+        </tr>
+      `).join('')
+    } catch (e) {
+      console.error('Error loading popup history:', e)
+    }
+  }
+
+  function loadPopupForEdit(popup) {
+    currentPopupData = popup
+    document.getElementById('popupTitle').value = popup.title || ''
+    document.getElementById('popupAppType').value = popup.app_type
+    document.getElementById('popupHtmlContent').value = popup.html_content || ''
+    
+    const toggle = document.getElementById('popupToggle')
+    if (popup.is_enabled) {
+      toggle.classList.add('active')
+    } else {
+      toggle.classList.remove('active')
+    }
+
+    updatePopupPreview()
+  }
+
+  function clearPopupForm() {
+    currentPopupData = null
+    document.getElementById('popupTitle').value = ''
+    document.getElementById('popupAppType').value = 'customer'
+    document.getElementById('popupHtmlContent').value = ''
+    document.getElementById('popupToggle').classList.remove('active')
+    updatePopupPreview()
+  }
+
+  function togglePopupEnabled() {
+    const toggle = document.getElementById('popupToggle')
+    toggle.classList.toggle('active')
+  }
+
+  function updatePopupPreview() {
+    const htmlContent = document.getElementById('popupHtmlContent').value
+    const preview = document.getElementById('popupPreview')
+    
+    if (!htmlContent.trim()) {
+      preview.innerHTML = '<p style="color: var(--text-muted); text-align: center;">Enter HTML content to see preview...</p>'
+      return
+    }
+
+    try {
+      preview.innerHTML = htmlContent
+    } catch (e) {
+      preview.innerHTML = '<p style="color: var(--red); text-align: center;">Invalid HTML</p>'
+    }
+  }
+
+  // Listen for changes in HTML textarea
+  document.addEventListener('DOMContentLoaded', () => {
+    const textarea = document.getElementById('popupHtmlContent')
+    if (textarea) {
+      textarea.addEventListener('input', updatePopupPreview)
+    }
+  })
+
+  async function savePopup() {
+    const title = document.getElementById('popupTitle').value.trim()
+    const appType = document.getElementById('popupAppType').value
+    const htmlContent = document.getElementById('popupHtmlContent').value.trim()
+    const isEnabled = document.getElementById('popupToggle').classList.contains('active')
+
+    if (!title) {
+      showToast('Please enter a popup title', 'error')
+      return
+    }
+
+    if (!htmlContent) {
+      showToast('Please enter HTML content', 'error')
+      return
+    }
+
+    try {
+      const h = {
+        'apikey': SUPABASE_SECRET_KEY,
+        'Authorization': `Bearer ${SUPABASE_SECRET_KEY}`,
+        'Content-Type': 'application/json'
+      }
+
+      if (currentPopupData?.id) {
+        // Update existing popup and increment version
+        const res = await fetch(
+          `${SUPABASE_URL}/rest/v1/popup_settings?id=eq.${currentPopupData.id}`,
+          {
+            method: 'PATCH',
+            headers: h,
+            body: JSON.stringify({
+              title: title,
+              html_content: htmlContent,
+              is_enabled: isEnabled,
+              version: (currentPopupData.version || 1) + 1,
+              updated_at: new Date().toISOString()
+            })
+          }
+        )
+        if (!res.ok) throw new Error('Failed to update popup')
+      } else {
+        // Create new popup
+        const res = await fetch(
+          `${SUPABASE_URL}/rest/v1/popup_settings`,
+          {
+            method: 'POST',
+            headers: { ...h, 'Prefer': 'return=minimal' },
+            body: JSON.stringify({
+              title: title,
+              app_type: appType,
+              html_content: htmlContent,
+              is_enabled: isEnabled,
+              version: 1
+            })
+          }
+        )
+        if (!res.ok) throw new Error('Failed to create popup')
+      }
+
+      showToast('✓ Popup saved and deployed!', 'success')
+      clearPopupForm()
+      loadPopupStatus()
+      loadPopupHistory()
+    } catch (e) {
+      console.error('Error:', e)
+      showToast('Error saving popup: ' + e.message, 'error')
+    }
+  }
+
+  async function deletePopupById(popupId, title) {
+    if (!confirm(`Delete "${title || 'Untitled'}"? This cannot be undone.`)) {
+      return
+    }
+
+    try {
+      const h = {
+        'apikey': SUPABASE_SECRET_KEY,
+        'Authorization': `Bearer ${SUPABASE_SECRET_KEY}`,
+        'Content-Type': 'application/json'
+      }
+
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/popup_settings?id=eq.${popupId}`,
+        {
+          method: 'DELETE',
+          headers: h
+        }
+      )
+
+      if (!res.ok) throw new Error('Failed to delete popup')
+
+      showToast('✓ Popup deleted!', 'success')
+      
+      if (currentPopupData?.id === popupId) {
+        clearPopupForm()
+      }
+      
+      loadPopupStatus()
+      loadPopupHistory()
+    } catch (e) {
+      console.error('Error:', e)
+      showToast('Error deleting popup: ' + e.message, 'error')
+    }
+  }
+
+  // ===== EXISTING FUNCTIONS =====
+
+  async function loadDisclaimerStatus() {
+    try {
+      const h = { 'apikey': SUPABASE_SECRET_KEY, 'Authorization': `Bearer ${SUPABASE_SECRET_KEY}` }
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/admin_settings?key=eq.disclaimer_enabled&select=value`,
+        { headers: h }
+      )
+      const data = await res.json()
+      
+      const isEnabled = data && data.length > 0 && data[0].value === true
+      const toggle = document.getElementById('disclaimerToggle')
+      
+      if (isEnabled) {
+        toggle.classList.add('active')
+      } else {
+        toggle.classList.remove('active')
+      }
+    } catch(e) {
+      console.error('Error loading disclaimer status:', e)
+    }
+  }
+
+  async function toggleDisclaimer() {
+    try {
+      const toggle = document.getElementById('disclaimerToggle')
+      const currentState = toggle.classList.contains('active')
+      const newState = !currentState
+      
+      const h = {
+        'apikey': SUPABASE_SECRET_KEY,
+        'Authorization': `Bearer ${SUPABASE_SECRET_KEY}`,
+        'Content-Type': 'application/json'
+      }
+
+      // Update or upsert the setting
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/admin_settings?key=eq.disclaimer_enabled`,
+        {
+          method: 'PATCH',
+          headers: h,
+          body: JSON.stringify({ value: newState })
+        }
+      )
+
+      if (!res.ok) {
+        // If update fails, try insert
+        const insertRes = await fetch(
+          `${SUPABASE_URL}/rest/v1/admin_settings`,
+          {
+            method: 'POST',
+            headers: h,
+            body: JSON.stringify({ key: 'disclaimer_enabled', value: newState })
+          }
+        )
+        if (!insertRes.ok) throw new Error('Failed to save setting')
+      }
+
+      if (newState) {
+        toggle.classList.add('active')
+        showToast('✓ Disclaimer enabled for new sign-ups', 'success')
+      } else {
+        toggle.classList.remove('active')
+        showToast('✓ Disclaimer disabled for new sign-ups', 'success')
+      }
+    } catch(e) {
+      console.error('Error toggling disclaimer:', e)
+      showToast('Error updating setting', 'error')
+    }
+  }
+
+  async function loadStats() {
+    try {
+      const h = { 'apikey': SUPABASE_SECRET_KEY, 'Authorization': `Bearer ${SUPABASE_SECRET_KEY}`, 'Prefer': 'count=exact', 'Range': '0-0' }
+      const cRes = await fetch(`${SUPABASE_URL}/rest/v1/profiles?select=id&expo_push_token=not.is.null`, { headers: h })
+      const lRes = await fetch(`${SUPABASE_URL}/rest/v1/laundries?select=id&expo_push_token=not.is.null`, { headers: h })
+      const cc = cRes.headers.get('content-range')?.split('/')[1] ?? '?'
+      const lc = lRes.headers.get('content-range')?.split('/')[1] ?? '?'
+      document.getElementById('statCustomers').textContent = cc
+      document.getElementById('statCleaners').textContent = lc
+      document.getElementById('statTotal').textContent = ((parseInt(cc)||0)+(parseInt(lc)||0)) || '?'
+    } catch(e) { console.error('Stats:', e) }
+  }
+
+  async function loadPayoutsOwed() {
+    try {
+      const h = { 'apikey': SUPABASE_SECRET_KEY, 'Authorization': `Bearer ${SUPABASE_SECRET_KEY}` }
+      
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/order_discounts?select=*,promo_codes(code)&is_paid=eq.false&order=created_at.desc`,
+        { headers: h }
+      )
+      const discounts = await res.json()
+
+      const unpaidDiscounts = discounts.filter(d => d.is_paid === false || d.is_paid === null)
+      
+      console.log('All discounts:', discounts)
+      console.log('Unpaid discounts:', unpaidDiscounts)
+
+      if (!unpaidDiscounts || unpaidDiscounts.length === 0) {
+        document.getElementById('payoutsContainer').innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">📭</div>
+            <p>No discounts used yet.</p>
+          </div>
+        `
+        document.getElementById('totalOweAmount').textContent = '₦0'
+        document.getElementById('cleanersWithPayouts').textContent = '0'
+        document.getElementById('totalDiscountsGiven').textContent = '0'
+        return
+      }
+
+      const orderRes = await fetch(
+        `${SUPABASE_URL}/rest/v1/orders?select=id,laundry_id`,
+        { headers: h }
+      )
+      const orders = await orderRes.json()
+      console.log('All orders:', orders)
+      const orderMap = Object.fromEntries(orders.map(o => [o.id, o.laundry_id]))
+
+      const laundryIds = [...new Set(discounts.map(d => orderMap[d.order_id]).filter(Boolean))]
+      
+      console.log('Laundry IDs:', laundryIds)
+
+      if (!laundryIds.length) {
+        document.getElementById('payoutsContainer').innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">📭</div>
+            <p>No laundries found for discounts.</p>
+          </div>
+        `
+        return
+      }
+
+      const laundresRes = await fetch(
+        `${SUPABASE_URL}/rest/v1/laundries?id=in.(${laundryIds.join(',')})&select=id,name,account_number,account_name,bank_name,bank_code,contact_details`,
+        { headers: h }
+      )
+      const laundries = await laundresRes.json()
+      console.log('Laundries:', laundries)
+      const laundryMap = Object.fromEntries(laundries.map(l => [l.id, l]))
+
+      const payoutsByLaundry = {}
+      unpaidDiscounts.forEach(d => {
+        const laundryId = orderMap[d.order_id]
+        if (!laundryId) return
+        
+        if (!payoutsByLaundry[laundryId]) {
+          payoutsByLaundry[laundryId] = {
+            laundry: laundryMap[laundryId],
+            totalDiscount: 0,
+            discounts: []
+          }
+        }
+        payoutsByLaundry[laundryId].totalDiscount += d.discount_amount
+        payoutsByLaundry[laundryId].discounts.push(d)
+      })
+
+      const totalOwed = Object.values(payoutsByLaundry).reduce((sum, p) => sum + p.totalDiscount, 0)
+      document.getElementById('totalOweAmount').textContent = '₦' + totalOwed.toLocaleString()
+      document.getElementById('cleanersWithPayouts').textContent = Object.keys(payoutsByLaundry).length
+      document.getElementById('totalDiscountsGiven').textContent = unpaidDiscounts.length
+
+      const html = Object.values(payoutsByLaundry)
+        .sort((a, b) => b.totalDiscount - a.totalDiscount)
+        .map(payout => {
+          const laundry = payout.laundry
+          return `
+            <div class="payout-card">
+              <div class="payout-header">
+                <div>
+                  <div class="payout-cleaner-name">${laundry?.name || 'Unknown Cleaner'}</div>
+                  <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">ID: ${laundry?.id}</div>
+                </div>
+                <div style="text-align: right;">
+                  <div class="payout-amount">₦${payout.totalDiscount.toLocaleString()}</div>
+                  <div class="payout-status pending" style="margin-top: 8px;">Pending</div>
+                </div>
+              </div>
+
+              <div class="payout-details">
+                <div class="payout-detail">
+                  <div class="payout-detail-label">Account Name</div>
+                  <div class="payout-detail-value">${laundry?.account_name || '—'}</div>
+                </div>
+                <div class="payout-detail">
+                  <div class="payout-detail-label">Account Number</div>
+                  <div class="payout-detail-value">${laundry?.account_number || '—'}</div>
+                </div>
+                <div class="payout-detail">
+                  <div class="payout-detail-label">Bank Name</div>
+                  <div class="payout-detail-value">${laundry?.bank_name || '—'}</div>
+                </div>
+                <div class="payout-detail">
+                  <div class="payout-detail-label">Contact</div>
+                  <div class="payout-detail-value">${laundry?.contact_details || '—'}</div>
+                </div>
+              </div>
+
+              <div class="payout-actions">
+                <button class="btn-small success" onclick="markPayoutPaid('${laundry?.id}', ${payout.totalDiscount})">Mark as Paid</button>
+              </div>
+            </div>
+          `
+        })
+        .join('')
+
+      document.getElementById('payoutsContainer').innerHTML = html || '<div class="empty-state"><div class="empty-state-icon">📭</div><p>No payouts owed.</p></div>'
+    } catch(e) { console.error('Error loading payouts:', e) }
+  }
+
+  async function markPayoutPaid(laundryId, amount) {
+    if (!confirm(`Mark ₦${amount.toLocaleString()} as paid?`)) return
+    
+    try {
+      const h = { 'apikey': SUPABASE_SECRET_KEY, 'Authorization': `Bearer ${SUPABASE_SECRET_KEY}` }
+      
+      const orderRes = await fetch(
+        `${SUPABASE_URL}/rest/v1/orders?select=id&laundry_id=eq.${laundryId}`,
+        { headers: h }
+      )
+      const orders = await orderRes.json()
+      
+      console.log('Orders to mark paid:', orders)
+      
+      if (!orders || orders.length === 0) {
+        showToast('No orders found for this laundry', 'error')
+        return
+      }
+
+      const orderIds = orders.map(o => o.id)
+      
+      const { error } = await fetch(
+        `${SUPABASE_URL}/rest/v1/rpc/mark_discounts_paid`,
+        {
+          method: 'POST',
+          headers: { ...h, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ p_laundry_id: laundryId })
+        }
+      )
+
+      if (error) throw error
+
+      const cards = document.querySelectorAll('.payout-card')
+      cards.forEach(card => {
+        if (card.textContent.includes(laundryId)) {
+          card.style.opacity = '0'
+          card.style.transition = 'opacity 0.3s'
+          setTimeout(() => card.remove(), 300)
+        }
+      })
+      
+      showToast(`✓ ₦${amount.toLocaleString()} marked as paid!`, 'success')
+      
+      setTimeout(() => {
+        const remainingCards = document.querySelectorAll('.payout-card')
+        let totalOwed = 0
+        remainingCards.forEach(card => {
+          const amountText = card.querySelector('.payout-amount').textContent
+          const amt = parseInt(amountText.replace(/[^\d]/g, ''))
+          totalOwed += amt
+        })
+        document.getElementById('totalOweAmount').textContent = '₦' + totalOwed.toLocaleString()
+        document.getElementById('cleanersWithPayouts').textContent = remainingCards.length
+      }, 350)
+    } catch(e) {
+      console.error('Error:', e)
+      showToast('Error marking as paid', 'error')
+    }
+  }
+
+  async function createPromoCode() {
+    const code = document.getElementById('promoCode').value.trim().toUpperCase()
+    const discountType = document.getElementById('discountType').value
+    const discountValue = parseFloat(document.getElementById('discountValue').value)
+    const maxUses = document.getElementById('maxUses').value ? parseInt(document.getElementById('maxUses').value) : null
+    const validUntil = document.getElementById('validUntil').value
+    const minOrderValue = document.getElementById('minOrderValue').value ? parseFloat(document.getElementById('minOrderValue').value) : null
+
+    if (!code) { showToast('Please enter a promo code', 'error'); return }
+    if (!discountValue || discountValue <= 0) { showToast('Please enter a valid discount value', 'error'); return }
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/promo_codes`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_SECRET_KEY,
+          'Authorization': `Bearer ${SUPABASE_SECRET_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          code: code,
+          discount_type: discountType,
+          discount_value: discountValue,
+          max_uses: maxUses,
+          valid_until: validUntil || null,
+          min_order_value: minOrderValue,
+          is_active: true
+        })
+      })
+
+      if (!res.ok) throw new Error('Failed to create code')
+
+      showToast('✓ Promo code created successfully!', 'success')
+      document.getElementById('promoCode').value = ''
+      document.getElementById('discountValue').value = ''
+      document.getElementById('maxUses').value = ''
+      document.getElementById('validUntil').value = ''
+      document.getElementById('minOrderValue').value = ''
+      loadPromoCodesTable()
+    } catch(e) {
+      console.error('Error:', e)
+      showToast('Error creating promo code: ' + e.message, 'error')
+    }
+  }
+
+  async function loadPromoCodesTable() {
+    try {
+      const h = { 'apikey': SUPABASE_SECRET_KEY, 'Authorization': `Bearer ${SUPABASE_SECRET_KEY}` }
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/promo_codes?is_active=eq.true&order=created_at.desc`, { headers: h })
+      const codes = await res.json()
+
+      const tbody = document.getElementById('promoTableBody')
+      if (!codes.length) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 28px;">No promo codes created yet.</td></tr>'
+        return
+      }
+
+      tbody.innerHTML = codes.map(code => `
+        <tr>
+          <td><span class="code-badge">${code.code}</span></td>
+          <td>${code.discount_type === 'percentage' ? code.discount_value + '%' : '₦' + code.discount_value.toLocaleString()}</td>
+          <td>${code.current_uses}${code.max_uses ? '/' + code.max_uses : '/∞'}</td>
+          <td>${code.valid_until ? new Date(code.valid_until).toLocaleDateString() : 'Never'}</td>
+          <td><span class="status-active">Active</span></td>
+          <td>
+            <button class="btn-small danger" onclick="deactivatePromoCode(${code.id})">Deactivate</button>
+          </td>
+        </tr>
+      `).join('')
+    } catch(e) { console.error('Error loading promo codes:', e) }
+  }
+
+  setInterval(() => {
+    const promoTab = document.getElementById('promo')
+    if (promoTab && promoTab.classList.contains('active')) {
+      loadPromoCodesTable()
+    }
+  }, 10000)
+
+  async function deactivatePromoCode(id) {
+    if (!confirm('Deactivate this promo code?')) return
+    
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/promo_codes?id=eq.${id}`, {
+        method: 'PATCH',
+        headers: {
+          'apikey': SUPABASE_SECRET_KEY,
+          'Authorization': `Bearer ${SUPABASE_SECRET_KEY}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ is_active: false })
+      })
+      
+      if (!res.ok) throw new Error('Failed to deactivate')
+      showToast('✓ Promo code deactivated', 'success')
+      loadPromoCodesTable()
+    } catch(e) { showToast('Error deactivating code', 'error') }
+  }
+
+  async function loadDiscountTracking() {
+    try {
+      const h = { 'apikey': SUPABASE_SECRET_KEY, 'Authorization': `Bearer ${SUPABASE_SECRET_KEY}` }
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/order_discounts?select=*,promo_codes(code)&order=created_at.desc&limit=20`, { headers: h })
+      const discounts = await res.json()
+
+      const tbody = document.getElementById('discountTableBody')
+      if (!discounts.length) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 28px;">No discounts used yet.</td></tr>'
+        return
+      }
+
+      tbody.innerHTML = discounts.map(d => `
+        <tr>
+          <td>#${d.order_id}</td>
+          <td><span class="code-badge">${d.promo_codes?.code || '—'}</span></td>
+          <td>₦${d.discount_amount.toLocaleString()}</td>
+          <td>₦${d.original_price.toLocaleString()}</td>
+          <td>₦${d.final_price.toLocaleString()}</td>
+          <td>${new Date(d.created_at).toLocaleDateString()}</td>
+        </tr>
+      `).join('')
+    } catch(e) { console.error('Error loading discounts:', e) }
+  }
+
+  async function sendNotification() {
+    const title = document.getElementById('notifTitle').value.trim()
+    const body = document.getElementById('notifBody').value.trim()
+    const target = document.getElementById('targetSelect').value
+
+    if (!title) { showToast('Please enter a title', 'error'); return }
+    if (!body) { showToast('Please enter a message', 'error'); return }
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/send-push-notification`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${SUPABASE_SECRET_KEY}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, body, target })
+      })
+      const result = await res.json()
+      if (result.success) {
+        showToast('✓ Notification sent!', 'success')
+        document.getElementById('notifTitle').value = ''
+        document.getElementById('notifBody').value = ''
+      } else {
+        showToast('Failed: ' + result.error, 'error')
+      }
+    } catch(e) { showToast('Error sending notification', 'error') }
+  }
+
+  function updatePromoPreview() {
+    // Preview functionality can be added here if needed
+  }
+
+  // ===== VERSION MANAGEMENT FUNCTIONS =====
+  async function loadVersionsTable() {
+    try {
+      const h = { 'apikey': SUPABASE_SECRET_KEY, 'Authorization': `Bearer ${SUPABASE_SECRET_KEY}` }
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/app_versions?order=release_date.desc&limit=50`,
+        { headers: h }
+      )
+      const versions = await res.json()
+
+      const tbody = document.getElementById('versionsTableBody')
+      if (!versions.length) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 28px;">No versions released yet.</td></tr>'
+        return
+      }
+
+      tbody.innerHTML = versions.map(v => `
+        <tr>
+          <td>${v.app_name === 'drycleaners' ? '🧺 Dry Cleaners' : '📱 Customer'}</td>
+          <td>${v.platform === 'both' ? 'Both' : v.platform.toUpperCase()}</td>
+          <td><span class="code-badge">${v.version}</span></td>
+          <td>${new Date(v.release_date).toLocaleDateString()}</td>
+          <td>
+            <span class="payout-status ${v.is_critical ? 'pending' : 'paid'}" style="background: ${v.is_critical ? 'rgba(239,68,68,0.1)' : 'rgba(34,197,94,0.1)'}; color: ${v.is_critical ? '#b91c1c' : '#15803d'};">
+              ${v.is_critical ? 'Critical' : 'Optional'}
+            </span>
+          </td>
+          <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;">${v.changelog || '—'}</td>
+          <td>
+            <button class="btn-small danger" onclick="deleteVersion('${v.id}')">Delete</button>
+          </td>
+        </tr>
+      `).join('')
+
+      loadCurrentVersions()
+    } catch(e) { console.error('Error loading versions:', e) }
+  }
+
+  async function loadCurrentVersions() {
+    try {
+      const h = { 'apikey': SUPABASE_SECRET_KEY, 'Authorization': `Bearer ${SUPABASE_SECRET_KEY}` }
+      
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/app_versions?order=release_date.desc`, { headers: h })
+      const allVersions = await res.json()
+
+      const apps = ['drycleaners', 'customer']
+      const platforms = ['ios', 'android']
+      const currentVersions = {}
+
+      apps.forEach(app => {
+        platforms.forEach(platform => {
+          const key = `${app}-${platform}`
+          const latest = allVersions.find(v => v.app_name === app && v.platform === platform)
+          if (latest) {
+            currentVersions[key] = latest
+          }
+        })
+      })
+
+      const container = document.getElementById('currentVersionsContainer')
+      const html = Object.entries(currentVersions).map(([key, v]) => `
+        <div style="background: rgba(255,255,255,0.72); border: 1px solid rgba(187,210,240,0.8); border-radius: 16px; padding: 20px;">
+          <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">
+            ${v.app_name === 'drycleaners' ? '🧺 Dry Cleaners' : '📱 Customer'} • ${v.platform.toUpperCase()}
+          </div>
+          <div style="font-size: 1.8rem; font-weight: bold; color: var(--blue); margin-bottom: 12px;">v${v.version}</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">
+            ${new Date(v.release_date).toLocaleDateString()}
+          </div>
+          <span class="payout-status ${v.is_critical ? 'pending' : 'paid'}" style="background: ${v.is_critical ? 'rgba(239,68,68,0.1)' : 'rgba(34,197,94,0.1)'}; color: ${v.is_critical ? '#b91c1c' : '#15803d'}; margin-top: 12px;">
+            ${v.is_critical ? '⚠️ Critical' : '✓ Optional'}
+          </span>
+        </div>
+      `).join('')
+
+      container.innerHTML = html || '<p style="color: var(--text-muted);">No versions deployed yet.</p>'
+    } catch(e) { console.error('Error loading current versions:', e) }
+  }
+
+  async function releaseNewVersion() {
+    const app = document.getElementById('versionApp').value
+    const platformSelect = document.getElementById('versionPlatform').value
+    const version = document.getElementById('versionNumber').value.trim()
+    const changelog = document.getElementById('versionChangelog').value.trim()
+    const isCritical = document.getElementById('versionCritical').checked
+
+    if (!version) { showToast('Please enter version number', 'error'); return }
+
+    try {
+      const h = {
+        'apikey': SUPABASE_SECRET_KEY,
+        'Authorization': `Bearer ${SUPABASE_SECRET_KEY}`,
+        'Content-Type': 'application/json'
+      }
+
+      const platforms = platformSelect === 'both' ? ['ios', 'android'] : [platformSelect]
+
+      for (const platform of platforms) {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/app_versions`, {
+          method: 'POST',
+          headers: { ...h, 'Prefer': 'return=minimal' },
+          body: JSON.stringify({
+            app_name: app,
+            version: version,
+            platform: platform,
+            is_critical: isCritical,
+            changelog: changelog,
+            release_date: new Date().toISOString()
+          })
+        })
+
+        if (!res.ok) throw new Error(`Failed to release for ${platform}`)
+      }
+
+      showToast(`✓ Version ${version} released!`, 'success')
+      document.getElementById('versionNumber').value = ''
+      document.getElementById('versionChangelog').value = ''
+      document.getElementById('versionCritical').checked = false
+      loadVersionsTable()
+    } catch(e) {
+      console.error('Error:', e)
+      showToast('Error releasing version: ' + e.message, 'error')
+    }
+  }
+
+  async function deleteVersion(id) {
+    if (!confirm('Delete this version?')) return
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/app_versions?id=eq.${id}`, {
+        method: 'DELETE',
+        headers: {
+          'apikey': SUPABASE_SECRET_KEY,
+          'Authorization': `Bearer ${SUPABASE_SECRET_KEY}`
+        }
+      })
+
+      if (!res.ok) throw new Error('Failed to delete')
+      showToast('✓ Version deleted', 'success')
+      loadVersionsTable()
+    } catch(e) {
+      console.error('Error:', e)
+      showToast('Error deleting version', 'error')
+    }
+  }
+
+  function showToast(message, type) {
+    const toast = document.getElementById('toast')
+    toast.textContent = message
+    toast.className = `toast ${type} show`
+    setTimeout(() => toast.classList.remove('show'), 3500)
+  }
+</script>
+</body>
+</html>
