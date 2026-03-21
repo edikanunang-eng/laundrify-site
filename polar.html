@@ -612,10 +612,10 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  // Environment Variables 
-  const ADMIN_PASSWORD = globalThis.ADMIN_PASSWORD
-  const SUPABASE_URL = globalThis.SUPABASE_URL
-  const SUPABASE_SECRET_KEY = globalThis.SUPABASE_SECRET_KEY
+  
+  const ADMIN_PASSWORD = '5308'
+  const SUPABASE_URL = 'https://abbyesfjcvovdbrpbmuc.supabase.co'
+  const SUPABASE_SECRET_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFiYnllc2ZqY3ZvdmRicnBibXVjIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2ODc0Mzk5NCwiZXhwIjoyMDg0MzE5OTk0fQ.TTaLAnL79frEJ7lVSD1hJiqFLA2V-WJ617z0yFrx7kI'
 
   function login() {
     const val = document.getElementById('passwordInput').value
@@ -779,7 +779,6 @@
     }
   }
 
-  // Listen for changes in HTML textarea
   document.addEventListener('DOMContentLoaded', () => {
     const textarea = document.getElementById('popupHtmlContent')
     if (textarea) {
@@ -811,7 +810,6 @@
       }
 
       if (currentPopupData?.id) {
-        // Update existing popup and increment version
         const res = await fetch(
           `${SUPABASE_URL}/rest/v1/popup_settings?id=eq.${currentPopupData.id}`,
           {
@@ -828,7 +826,6 @@
         )
         if (!res.ok) throw new Error('Failed to update popup')
       } else {
-        // Create new popup
         const res = await fetch(
           `${SUPABASE_URL}/rest/v1/popup_settings`,
           {
@@ -892,8 +889,6 @@
     }
   }
 
-  // ===== EXISTING FUNCTIONS =====
-
   async function loadDisclaimerStatus() {
     try {
       const h = { 'apikey': SUPABASE_SECRET_KEY, 'Authorization': `Bearer ${SUPABASE_SECRET_KEY}` }
@@ -928,7 +923,6 @@
         'Content-Type': 'application/json'
       }
 
-      // Update or upsert the setting
       const res = await fetch(
         `${SUPABASE_URL}/rest/v1/admin_settings?key=eq.disclaimer_enabled`,
         {
@@ -939,7 +933,6 @@
       )
 
       if (!res.ok) {
-        // If update fails, try insert
         const insertRes = await fetch(
           `${SUPABASE_URL}/rest/v1/admin_settings`,
           {
@@ -1314,11 +1307,8 @@
     } catch(e) { showToast('Error sending notification', 'error') }
   }
 
-  function updatePromoPreview() {
-    // Preview functionality can be added here if needed
-  }
+  function updatePromoPreview() {}
 
-  // ===== VERSION MANAGEMENT FUNCTIONS =====
   async function loadVersionsTable() {
     try {
       const h = { 'apikey': SUPABASE_SECRET_KEY, 'Authorization': `Bearer ${SUPABASE_SECRET_KEY}` }
